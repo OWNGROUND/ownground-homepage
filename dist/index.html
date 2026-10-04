@@ -1,6 +1,5 @@
 <!doctype html>
-<html lang="ko">
-<head>
+<html lang="ko"><head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="OWNGROUND는 제조 현장의 데이터와 운영, 사람과 시스템을 하나의 흐름으로 연결합니다.">
@@ -26,7 +25,7 @@
   </style>
 </head>
 <body>
-  <iframe id="preview" title="OWNGROUND | 제조의 오늘과 내일을 잇습니다." src="./site-shell.html#brand-core"></iframe>
+  <iframe id="preview" title="OWNGROUND — 한국어" src="./site-shell.html#brand-core" style="visibility: visible;"></iframe>
   <script>
     const preview=document.querySelector('#preview');
     preview.addEventListener('load',()=>{
@@ -1046,6 +1045,11 @@
         const state=motionState.get(section);
         if(!state)return;
         const replayToken=++state.replayToken;
+        if(section===journeySections[0]&&source==='navigation'&&!reducedMotion.matches){
+          section.classList.remove('hero-click-replay');
+          void section.offsetWidth;
+          section.classList.add('hero-click-replay');
+        }
         section.classList.add('motion-reset');
         section.classList.remove('motion-active');
         void section.offsetWidth;
@@ -1160,5 +1164,6 @@
       }));
     },{once:true});
   </script>
-</body>
-</html>
+
+
+<span id="PING_CONTENT_PUSH_NOTIFICATION" style="display: none;"></span></body><div id="codex-browser-sidebar-comments-root" style="position: fixed; inset: 0px; pointer-events: none; z-index: 2147483647;"></div></html>
