@@ -886,7 +886,9 @@
         document.documentElement.lang=activeLocale;
         preview.title=`OWNGROUND — ${localeApi.registry[activeLocale].name}`;
         const url=new URL(window.location.href);
-        url.searchParams.set('lang',activeLocale);
+        url.searchParams.delete('v');
+        if(activeLocale===localeApi.contract.canonical)url.searchParams.delete('lang');
+        else url.searchParams.set('lang',activeLocale);
         window.history.replaceState(null,'',`${url.pathname}${url.search}${url.hash}`);
         renderLocaleSwitch();
       };
@@ -1166,4 +1168,5 @@
   </script>
 
 
-<span id="PING_CONTENT_PUSH_NOTIFICATION" style="display: none;"></span></body><div id="codex-browser-sidebar-comments-root" style="position: fixed; inset: 0px; pointer-events: none; z-index: 2147483647;"></div></html>
+<span id="PING_CONTENT_PUSH_NOTIFICATION" style="display: none;"></span><div id="codex-browser-sidebar-comments-root" style="position: fixed; inset: 0px; pointer-events: none; z-index: 2147483647;"></div>
+<span id="PING_CONTENT_PUSH_NOTIFICATION" style="display: none;"></span></body></html>
