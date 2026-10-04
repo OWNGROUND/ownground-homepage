@@ -1,0 +1,9 @@
+{
+  "name": "OWNGROUND",
+  "short_name": "OWNGROUND",
+  "description": "제조의 오늘과 내일을 잇습니다.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fbfcfb",
+  "theme_color": "#143d2c"
+}

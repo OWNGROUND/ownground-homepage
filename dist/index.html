@@ -1,0 +1,1061 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="OWNGROUND는 제조 현장의 데이터와 운영, 사람과 시스템을 하나의 흐름으로 연결합니다.">
+  <meta name="theme-color" content="#143d2c">
+  <link rel="canonical" href="https://ownground.kr/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="OWNGROUND">
+  <meta property="og:title" content="OWNGROUND | 제조의 오늘과 내일을 잇습니다.">
+  <meta property="og:description" content="제조 현장의 데이터와 운영, 사람과 시스템을 하나의 흐름으로 연결합니다.">
+  <meta property="og:url" content="https://ownground.kr/">
+  <meta property="og:image" content="https://ownground.kr/og-ownground.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OWNGROUND | 제조의 오늘과 내일을 잇습니다.">
+  <meta name="twitter:description" content="제조 현장의 데이터와 운영, 사람과 시스템을 하나의 흐름으로 연결합니다.">
+  <meta name="twitter:image" content="https://ownground.kr/og-ownground.svg">
+  <title>OWNGROUND | 제조의 오늘과 내일을 잇습니다.</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111915'/%3E%3Ccircle cx='16' cy='16' r='7.5' fill='none' stroke='%2383cda3' stroke-width='3.4'/%3E%3C/svg%3E">
+  <script src="./locales.js"></script>
+  <style>
+    html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#f7f8f5}
+    iframe{width:100%;height:100%;display:block;visibility:hidden;border:0;background:#f7f8f5}
+  </style>
+</head>
+<body>
+  <iframe id="preview" title="OWNGROUND | 제조의 오늘과 내일을 잇습니다." src="./site-shell.html#brand-core"></iframe>
+  <script>
+    const preview=document.querySelector('#preview');
+    preview.addEventListener('load',()=>{
+      const doc=preview.contentDocument;
+      const panel=doc.querySelector('#panel-d');
+      const refinement=doc.createElement('style');
+      refinement.textContent=`
+        html{scroll-behavior:auto!important}
+        /* OWNGROUND transition refinement: agency-led wordmark. */
+        .d .logo .own{color:var(--green)}
+        .d .logo .ground{color:var(--ink)}
+
+        /* Narrative v0.2 / 02 FROM DATA — observation becomes field conviction. */
+        .d .from-data-section{
+          min-height:calc(100vh - 86px);
+          padding:40px 3.5vw 48px;
+          display:grid;
+          grid-template-rows:auto 1fr;
+          border-bottom:2px solid var(--ink);
+          scroll-margin-top:0;
+        }
+        .d .from-data-section [data-reveal]{
+          opacity:1!important;
+          visibility:visible!important;
+          transform:none!important;
+          transition:none!important;
+        }
+        .d .from-data-kicker{
+          display:flex;
+          justify-content:space-between;
+          padding-bottom:22px;
+          color:var(--green);
+          font:700 10px "OWNGROUND IBM Plex Mono",monospace;
+          letter-spacing:.13em;
+          border-bottom:1px solid var(--line);
+        }
+        .d .from-data-content{
+          min-height:0;
+          display:grid;
+          grid-template-columns:minmax(0,1.18fr) minmax(360px,.82fr);
+          gap:7vw;
+          align-items:stretch;
+        }
+        .d .from-data-copy{
+          padding:clamp(54px,8vh,86px) 0 48px;
+          display:flex;
+          flex-direction:column;
+        }
+        .d .from-data-title{
+          max-width:760px;
+          margin:0;
+          color:var(--ink);
+          font-family:"OWNGROUND SUIT",sans-serif;
+          font-size:clamp(54px,5.15vw,82px);
+          font-weight:500;
+          line-height:1.02;
+          letter-spacing:-.065em;
+          word-break:keep-all;
+        }
+        .d .from-data-body{
+          max-width:650px;
+          margin:clamp(46px,7vh,72px) 0 0;
+          color:var(--muted);
+          font-family:"OWNGROUND Wanted Sans",sans-serif;
+          font-size:18px;
+          font-weight:430;
+          line-height:1.78;
+          letter-spacing:-.015em;
+        }
+        .d .from-data-body p{margin:0 0 24px}
+        .d .from-data-body p:last-child{margin-bottom:0}
+        .d .from-data-outcome{
+          padding:clamp(62px,10vh,106px) 0 48px 4vw;
+          display:flex;
+          flex-direction:column;
+          justify-content:space-between;
+          border-left:1px solid var(--line);
+        }
+        .d .from-data-flow{height:clamp(290px,38vh,350px);position:relative}
+        .d .evidence-layers{position:absolute;inset:0}
+        .d .evidence-depth-guide{
+          width:7%;
+          height:calc(57% + 10px);
+          position:absolute;
+          left:13%;
+          top:calc(15% + 39px);
+          border-left:1px solid rgba(137,154,145,.38);
+          border-bottom:1px solid rgba(137,154,145,.38);
+          transform:skewX(12deg);
+          transform-origin:bottom left;
+        }
+        .d .evidence-layer{position:absolute;height:54px}
+        .d .evidence-layer-data{left:8%;right:22%;top:15%}
+        .d .evidence-layer-operation{left:15%;right:12%;top:45%}
+        .d .evidence-layer-field{left:23%;right:1%;top:72%}
+        .d .evidence-line{
+          height:1px;
+          position:absolute;
+          left:0;
+          right:0;
+          bottom:0;
+          background:rgba(137,154,145,.5);
+          transform-origin:left center;
+        }
+        .d .evidence-layer-operation .evidence-line{background:rgba(96,118,106,.74)}
+        .d .evidence-layer-field .evidence-line{height:2px;background:var(--green)}
+        .d .evidence-node{
+          width:8px;
+          height:8px;
+          position:absolute;
+          left:-4px;
+          bottom:-3.5px;
+          z-index:1;
+          background:var(--paper);
+          border:1px solid rgba(96,118,106,.58);
+          border-radius:50%;
+        }
+        .d .evidence-layer-operation .evidence-node{border-color:rgba(96,118,106,.86)}
+        .d .evidence-layer-field .evidence-node{border-color:var(--green);border-width:1.5px}
+        .d .evidence-layer b{
+          position:absolute;
+          left:20px;
+          bottom:12px;
+          color:rgba(82,97,88,.66);
+          font-family:"OWNGROUND SUIT",sans-serif;
+          font-size:20px;
+          font-weight:580;
+          line-height:1;
+          letter-spacing:.08em;
+        }
+        .d .evidence-layer-operation b{color:rgba(42,58,49,.84);font-size:24px}
+        .d .evidence-layer-field b{color:var(--ink);font-size:34px;font-weight:620}
+        .d .evidence-layer small{
+          position:absolute;
+          right:0;
+          bottom:14px;
+          color:rgba(82,97,88,.52);
+          font:600 8px "OWNGROUND IBM Plex Mono",monospace;
+          letter-spacing:.1em;
+        }
+        .d .evidence-layer-operation small{color:rgba(82,97,88,.7)}
+        .d .evidence-layer-field small{color:var(--green)}
+
+        /* 01 / strong but restrained: preserve the curve, lower its ambient force. */
+        .d #brand-core .hero-curve{stroke-width:1.55;opacity:.84}
+        .d #brand-core .hero-guide{opacity:.26}
+        .d #brand-core .hero-node{stroke-width:1.65}
+        .d #brand-core .hero-node-glow{opacity:.18}
+
+        /* 03 / disconnected value: present points, no relationship lines yet. */
+        .d #field-leads .philosophy-copy{min-width:0;overflow:hidden}
+        .d .field-value{width:100%;min-width:0;margin:auto 0;padding:58px 0 42px}
+        .d .field-value-title{
+          max-width:410px;
+          margin:0;
+          color:var(--ink);
+          font-family:"OWNGROUND SUIT",sans-serif;
+          font-size:clamp(27px,2.25vw,36px);
+          font-weight:520;
+          line-height:1.28;
+          letter-spacing:-.045em;
+          word-break:keep-all;
+        }
+        .d .unconnected-field{height:280px;margin-top:44px;position:relative}
+        .d .unconnected-node{
+          --node-stroke-color:rgba(96,118,106,var(--alpha,.62));
+          width:var(--size);
+          height:var(--size);
+          position:absolute;
+          left:var(--x);
+          top:var(--y);
+          border:0;
+          border-radius:50%;
+          background:transparent;
+          box-shadow:inset 0 0 0 var(--outline) var(--node-stroke-color);
+        }
+        .d .unconnected-node.signal{--node-opacity:.9!important;--node-stroke-color:var(--green);opacity:.9!important}
+        .d{
+          --value-node-fg-size:clamp(22.5469px,1.7622vw,25.375px);
+          --value-node-mid-size:clamp(17.2031px,1.3433vw,19.3438px);
+          --value-node-bg-size:clamp(11.8438px,.9245vw,13.3125px);
+          --value-node-fg-outline:clamp(1.6496px,.1289vw,1.8559px);
+          --value-node-mid-outline:clamp(1.4344px,.1121vw,1.6138px);
+          --value-node-bg-outline:clamp(1.291px,.1009vw,1.4524px);
+        }
+        .d .unconnected-node.depth-bg{--size:var(--value-node-bg-size);--outline:var(--value-node-bg-outline);--depth-blur:1.1px;--motion-blur:1.4px;--node-opacity:.46;--rise:18px;--settle:-2px;--peak-scale:1.012;--node-duration:680ms;opacity:.46;filter:blur(var(--depth-blur))}
+        .d .unconnected-node.depth-mid{--size:var(--value-node-mid-size);--outline:var(--value-node-mid-outline);--depth-blur:.6px;--motion-blur:1px;--node-opacity:.72;--rise:23px;--settle:-3px;--peak-scale:1.015;--node-duration:760ms;opacity:.72;filter:blur(var(--depth-blur))}
+        .d .unconnected-node.depth-fg{--size:var(--value-node-fg-size);--outline:var(--value-node-fg-outline);--depth-blur:0px;--motion-blur:.6px;--node-opacity:.92;--rise:28px;--settle:-4px;--peak-scale:1.015;--node-duration:840ms;opacity:.92;filter:blur(var(--depth-blur))}
+        .d .field-value-meta{
+          padding-top:20px;
+          display:flex;
+          justify-content:space-between;
+          color:rgba(82,97,88,.68);
+          font:600 9px "OWNGROUND IBM Plex Mono",monospace;
+          letter-spacing:.1em;
+          border-top:1px solid var(--line);
+        }
+        .d .field-value-meta span:first-child{color:var(--green)}
+
+        .d .motion-ready .unconnected-node{
+          opacity:0;
+          transform:translateY(var(--rise)) scale(.94);
+          filter:blur(calc(var(--depth-blur) + var(--motion-blur)));
+        }
+        .d .motion-ready .unconnected-node.group-1{--node-delay:520ms}
+        .d .motion-ready .unconnected-node.group-2{--node-delay:630ms}
+        .d .motion-ready .unconnected-node.group-3{--node-delay:740ms}
+        .d .motion-ready .unconnected-node.group-4{--node-delay:850ms}
+        .d .motion-ready .unconnected-node.group-5{--node-delay:960ms}
+        .d .motion-ready.motion-active .unconnected-node{
+          animation:value-node-rise var(--node-duration) cubic-bezier(.18,.7,.22,1) var(--node-delay) both;
+        }
+        .d .motion-reset [data-motion],
+        .d .motion-reset .motion-line,
+        .d .motion-reset .motion-node,
+        .d .motion-reset .flow-line-motion,
+        .d .motion-reset .unconnected-node{
+          transition:none!important;
+          animation:none!important;
+        }
+        @keyframes value-node-rise{
+          0%{opacity:0;transform:translateY(var(--rise)) scale(.94);filter:blur(calc(var(--depth-blur) + var(--motion-blur)))}
+          72%{opacity:var(--node-opacity);transform:translateY(var(--settle)) scale(var(--peak-scale));filter:blur(var(--depth-blur))}
+          100%{opacity:var(--node-opacity);transform:translateY(0) scale(1);filter:blur(var(--depth-blur))}
+        }
+        .d .from-data-conclusion{padding-top:60px;border-top:1px solid var(--line)}
+        .d .from-data-conclusion small{
+          display:block;
+          margin-bottom:22px;
+          color:var(--green);
+          font:700 10px "OWNGROUND IBM Plex Mono",monospace;
+          letter-spacing:.13em;
+        }
+        .d .from-data-conclusion strong{
+          display:block;
+          color:var(--ink);
+          font-family:"OWNGROUND SUIT",sans-serif;
+          font-size:clamp(34px,3vw,48px);
+          font-weight:520;
+          line-height:1.12;
+          letter-spacing:-.055em;
+          word-break:keep-all;
+        }
+
+        /* Narrative v0.2 navigation: six-step journey and quiet active signals. */
+        @media(min-width:901px){
+          .d .site-head nav{align-self:stretch}
+          .d .site-head nav a{
+            min-width:0;
+            padding:0 clamp(13px,1.25vw,20px);
+            position:relative;
+            display:flex;
+            align-items:center;
+            color:var(--muted);
+            font-size:11px;
+            white-space:nowrap;
+            transition:color .18s ease;
+          }
+          .d .site-head nav a:after{
+            content:"";
+            height:2px;
+            position:absolute;
+            left:clamp(13px,1.25vw,20px);
+            right:clamp(13px,1.25vw,20px);
+            bottom:-2px;
+            background:var(--green);
+            opacity:0;
+            transform:scaleX(.35);
+            transform-origin:left;
+            transition:opacity .18s ease,transform .22s ease;
+          }
+          .d .site-head nav a[aria-current="page"]{color:var(--ink)}
+          .d .site-head nav a[aria-current="page"]:after{opacity:1;transform:scaleX(1)}
+          .d .site-head nav a:hover,.d .site-head nav a:focus-visible{color:var(--ink);outline:0}
+        }
+        .d .position-nav a{width:34px}
+        .d .position-nav a:before{
+          width:6px;
+          transition:width .22s cubic-bezier(.2,.7,.2,1),background-color .18s ease,opacity .18s ease;
+        }
+        .d .position-nav a[data-distance="2"]:before{width:9px}
+        .d .position-nav a[data-distance="1"]:before{width:15px}
+        .d .position-nav a[data-distance="0"]:before{width:24px;height:3px;background:var(--green);opacity:1}
+        .d .position-nav a:not([data-distance="0"]):hover:before,
+        .d .position-nav a:not([data-distance="0"]):focus-visible:before{width:18px;opacity:.9}
+        .d .locale-control{position:relative;padding:0!important;overflow:visible!important;background:transparent!important}
+        .d .locale-switch{
+          width:100%;height:100%;min-width:92px;padding:0 18px;border:0;background:transparent;
+          display:flex;align-items:center;justify-content:center;gap:9px;
+          color:var(--green);cursor:pointer;
+          font:700 10px "OWNGROUND IBM Plex Mono",monospace;letter-spacing:.11em;
+        }
+        .d .locale-switch:after{content:"+";color:var(--muted);font-size:12px;transition:transform .18s ease}
+        .d .locale-switch[aria-expanded="true"]:after{transform:rotate(45deg)}
+        .d .locale-switch:hover,.d .locale-switch:focus-visible{color:var(--ink);outline:0}
+        .d .locale-menu{
+          position:absolute;top:calc(100% + 1px);right:0;z-index:120;width:216px;
+          display:grid;grid-template-columns:repeat(3,1fr);
+          background:var(--paper);border:1px solid var(--ink);
+        }
+        .d .locale-menu[hidden]{display:none}
+        .d .locale-menu button{
+          min-height:44px;border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+          background:transparent;color:var(--muted);cursor:pointer;
+          font:700 10px "OWNGROUND IBM Plex Mono",monospace;letter-spacing:.1em;
+        }
+        .d .locale-menu button:nth-child(3n){border-right:0}
+        .d .locale-menu button:last-child{border-bottom:0}
+        .d .locale-menu button:hover,.d .locale-menu button:focus-visible{color:var(--ink);background:var(--soft);outline:0}
+        .d .locale-menu button[aria-current="true"]{color:var(--green);background:var(--soft)}
+        .d .logo-home{color:inherit;text-decoration:none;cursor:pointer}
+        .d .logo-home:hover,.d .logo-home:focus-visible{color:inherit;outline:0}
+        .d .header-contact{
+          min-width:0;padding:0 clamp(10px,1.1vw,18px);
+          display:flex;align-self:stretch;align-items:center;justify-content:center;
+          color:var(--green);text-decoration:none;white-space:nowrap;
+          font:700 9px "OWNGROUND IBM Plex Mono",monospace;letter-spacing:.035em;
+          border-left:1px solid var(--line);
+        }
+        .d .header-contact:hover,.d .header-contact:focus-visible{color:var(--paper);background:var(--green);outline:0}
+        .d.locale-latin .hero-title,
+        .d.locale-latin .from-data-title,
+        .d.locale-latin .from-data-body,
+        .d.locale-latin .from-data-conclusion strong,
+        .d.locale-latin .philosophy-title,
+        .d.locale-latin .philosophy-body-inline,
+        .d.locale-latin .field-value-title,
+        .d.locale-latin .story-head h2,
+        .d.locale-latin .gap-relation strong,
+        .d.locale-latin .gap-close strong,
+        .d.locale-latin .platform-head h2,
+        .d.locale-latin .ecosystem-title,
+        .d.locale-latin .ecosystem-role p{font-family:Inter,Arial,sans-serif}
+        .d.locale-ja .hero-title,
+        .d.locale-ja .from-data-title,
+        .d.locale-ja .from-data-body,
+        .d.locale-ja .from-data-conclusion strong,
+        .d.locale-ja .philosophy-title,
+        .d.locale-ja .philosophy-body-inline,
+        .d.locale-ja .field-value-title,
+        .d.locale-ja .story-head h2,
+        .d.locale-ja .gap-relation strong,
+        .d.locale-ja .gap-close strong,
+        .d.locale-ja .platform-head h2,
+        .d.locale-ja .ecosystem-title,
+        .d.locale-ja .ecosystem-role p{word-break:normal;overflow-wrap:break-word}
+
+        /* Four selected relationships form the environment; MOP is not a hub. */
+        .d .mop-center:before{display:none}
+        .d .mop-center:after{display:none}
+        .d .mop-center>*{
+          position:relative;
+          z-index:1;
+          text-shadow:none;
+        }
+        .d #the-platform [data-reveal],
+        .d #the-platform [data-reveal].is-visible{
+          opacity:1!important;
+          visibility:visible!important;
+          transform:none!important;
+          transition:none!important;
+          animation:none!important;
+        }
+        @media(min-width:901px){
+          .d #the-platform .platform-connections{
+            display:block!important;
+            opacity:1!important;
+            visibility:visible!important;
+          }
+        }
+        .d .mop-center strong{font-size:clamp(32px,2.5vw,38px)}
+        .d .platform-line-guide{display:none}
+        .d .platform-line{stroke-width:1.05;opacity:.72}
+        .d .platform-line.primary{stroke-width:1.35;opacity:.9}
+        .d .platform-line.secondary{stroke:#82978c;stroke-width:.85;opacity:.48}
+        .d .platform-line.dotted{stroke-dasharray:2 8;opacity:.42}
+        .d .platform-anchor-halo{fill:none;stroke:var(--green);stroke-width:1;opacity:.18}
+        .d .platform-signal-node{fill:var(--paper);stroke:#82978c;stroke-width:1;opacity:.78}
+        .d .platform-signal-node.active{fill:var(--green);stroke:var(--green);opacity:.82}
+        .d #the-platform .platform-head h2{
+          max-width:820px;
+          font-family:"OWNGROUND SUIT",sans-serif;
+          font-size:clamp(50px,5.25vw,80px);
+          font-weight:500;
+          line-height:.98;
+          letter-spacing:-.06em;
+          word-break:keep-all;
+        }
+        .d #the-platform .platform-name{
+          margin:0 0 8px;
+          padding-left:26px;
+          color:var(--ink);
+          font-family:Inter,Arial,sans-serif;
+          font-size:clamp(18px,1.45vw,23px);
+          font-weight:500;
+          line-height:1.35;
+          letter-spacing:-.025em;
+          border-left:1px solid var(--line);
+        }
+        .d #the-platform .platform-safe-zone{pointer-events:none}
+        .d .platform-mobile-connections{display:none}
+
+        /* Narrative v0.2 / 06 ECOSYSTEM — one platform, four equal roles. */
+        .d .ecosystem-section{
+          min-height:calc(100vh - 86px);
+          padding:40px 3.5vw 48px;
+          display:grid;
+          grid-template-rows:auto auto 1fr;
+          border-bottom:2px solid var(--ink);
+          scroll-margin-top:0;
+        }
+        .d .ecosystem-kicker{
+          display:flex;
+          justify-content:space-between;
+          padding-bottom:22px;
+          color:var(--green);
+          font:700 10px "OWNGROUND IBM Plex Mono",monospace;
+          letter-spacing:.13em;
+          border-bottom:1px solid var(--line);
+        }
+        .d .ecosystem-title{
+          max-width:820px;
+          margin:clamp(42px,6vh,66px) 0 clamp(38px,5vh,56px);
+          color:var(--ink);
+          font-family:"OWNGROUND SUIT",sans-serif;
+          font-size:clamp(50px,5.25vw,80px);
+          font-weight:500;
+          line-height:.98;
+          letter-spacing:-.06em;
+          word-break:keep-all;
+        }
+        .d .ecosystem-grid{
+          min-height:0;
+          display:grid;
+          grid-template-columns:1fr 1fr;
+          border-top:1px solid var(--ink);
+          border-bottom:1px solid var(--line);
+        }
+        .d .ecosystem-role{
+          min-height:clamp(150px,19vh,190px);
+          padding:clamp(24px,3vh,34px) clamp(24px,3vw,46px);
+          display:grid;
+          grid-template-rows:auto 1fr;
+          align-content:space-between;
+          gap:28px;
+        }
+        .d .ecosystem-role:nth-child(odd){padding-left:0;border-right:1px solid var(--line)}
+        .d .ecosystem-role:nth-child(-n+2){border-bottom:1px solid var(--line)}
+        .d .ecosystem-role small{
+          color:var(--green);
+          font:700 10px "OWNGROUND IBM Plex Mono",monospace;
+          letter-spacing:.13em;
+        }
+        .d .ecosystem-role h3{
+          margin:0;
+          color:var(--ink);
+          font-family:Inter,Arial,sans-serif;
+          font-size:clamp(28px,2.6vw,42px);
+          font-weight:500;
+          line-height:1;
+          letter-spacing:-.045em;
+        }
+        .d .ecosystem-role p{
+          max-width:520px;
+          margin:16px 0 0;
+          color:var(--muted);
+          font-family:"OWNGROUND Wanted Sans",sans-serif;
+          font-size:clamp(16px,1.35vw,20px);
+          font-weight:430;
+          line-height:1.55;
+          letter-spacing:-.018em;
+          word-break:keep-all;
+        }
+
+        /* Calm / precise / progressive section motion contract. */
+        .d .motion-ready [data-motion]{
+          opacity:0!important;
+          transform:translateY(14px)!important;
+          transition:opacity .38s cubic-bezier(.2,.7,.2,1),transform .42s cubic-bezier(.2,.7,.2,1)!important;
+          transition-delay:var(--motion-delay,0ms)!important;
+        }
+        .d #the-platform.motion-ready [data-motion],
+        .d .from-data-section.motion-ready [data-motion]{
+          opacity:0!important;
+          transform:translateY(14px)!important;
+          transition:opacity .38s cubic-bezier(.2,.7,.2,1),transform .42s cubic-bezier(.2,.7,.2,1)!important;
+          transition-delay:var(--motion-delay,0ms)!important;
+        }
+        .d .motion-ready.motion-active [data-motion]{opacity:1!important;transform:none!important}
+        .d #the-platform.motion-ready.motion-active [data-motion],
+        .d .from-data-section.motion-ready.motion-active [data-motion]{opacity:1!important;transform:none!important}
+        .d .motion-ready .motion-line{
+          stroke-dasharray:1;
+          stroke-dashoffset:1;
+          transition:stroke-dashoffset .68s cubic-bezier(.35,0,.2,1)!important;
+          transition-delay:var(--motion-delay,180ms)!important;
+        }
+        .d .motion-ready.motion-active .motion-line{stroke-dashoffset:0}
+        .d .motion-ready .flow-line-motion{
+          transform:scaleX(0);
+          transition:transform .46s cubic-bezier(.35,0,.2,1)!important;
+          transition-delay:var(--motion-delay,220ms)!important;
+        }
+        .d .motion-ready.motion-active .flow-line-motion{transform:scaleX(1)}
+        .d .motion-ready .principle-line{
+          background-size:0 1px!important;
+          transition:opacity .38s cubic-bezier(.2,.7,.2,1),transform .42s cubic-bezier(.2,.7,.2,1),background-size .52s cubic-bezier(.35,0,.2,1)!important;
+          transition-delay:var(--motion-delay,420ms)!important;
+        }
+        .d .motion-ready.motion-active .principle-line{background-size:100% 1px!important}
+        .d .motion-ready .motion-node{
+          opacity:0!important;
+          transform:scale(.7);
+          transform-box:fill-box;
+          transform-origin:center;
+          transition:opacity .22s ease,transform .22s ease!important;
+          transition-delay:var(--motion-delay,420ms)!important;
+        }
+        .d .motion-ready.motion-active .motion-node{opacity:1!important;transform:scale(1)}
+        .d .motion-ready.motion-active .ecosystem-role:nth-child(1){--motion-delay:160ms}
+        .d .motion-ready.motion-active .ecosystem-role:nth-child(2){--motion-delay:230ms}
+        .d .motion-ready.motion-active .ecosystem-role:nth-child(3){--motion-delay:300ms}
+        .d .motion-ready.motion-active .ecosystem-role:nth-child(4){--motion-delay:370ms}
+        @media(max-width:900px){
+          .d .site-head{padding:0 12px!important;display:grid!important;grid-template-columns:auto 58px minmax(116px,1fr)}
+          .d .logo-home{font-size:15px}
+          .d .locale-control{width:58px;min-width:0;justify-self:stretch}
+          .d .locale-switch{min-width:0;padding:0 6px;gap:5px}
+          .d .locale-menu{right:0;width:min(216px,calc(100vw - 40px))}
+          .d .header-contact{
+            width:auto;min-width:0;margin:0;padding:0 5px;
+            font-size:7.5px;line-height:1.25;letter-spacing:-.025em;
+            white-space:normal;overflow-wrap:anywhere;text-align:center;
+          }
+          .d .from-data-section{
+            min-height:0;
+            padding:34px 22px 58px;
+            scroll-margin-top:0;
+          }
+          .d .from-data-kicker{gap:18px;line-height:1.5}
+          .d .from-data-content{display:flex;flex-direction:column;gap:0}
+          .d .from-data-copy{padding:52px 0 0}
+          .d .from-data-title{font-size:clamp(46px,12vw,60px);line-height:1.04}
+          .d .from-data-body{margin-top:42px;font-size:17px;line-height:1.72}
+          .d .from-data-body p{margin-bottom:22px}
+          .d .from-data-outcome{padding:54px 0 0;border-left:0}
+          .d .from-data-flow{margin-bottom:66px}
+          .d .from-data-conclusion{padding-top:38px}
+          .d .from-data-conclusion strong{font-size:34px}
+          .d .position-nav a{width:44px;height:44px}
+          .d .position-nav a:before{width:5px}
+          .d .position-nav a[data-distance="2"]:before{width:7px}
+          .d .position-nav a[data-distance="1"]:before{width:11px}
+          .d .position-nav a[data-distance="0"]:before{width:18px}
+          .d .position-nav a:not([data-distance="0"]):hover:before,
+          .d .position-nav a:not([data-distance="0"]):focus-visible:before{width:14px}
+          .d #the-platform .platform-head{min-height:460px;padding-top:78px}
+          .d #the-platform .platform-head h2{font-size:clamp(44px,11.6vw,58px);line-height:1.02}
+          .d #the-platform .platform-name{
+            margin-top:44px;
+            padding:22px 0 0;
+            font-size:18px;
+            line-height:1.45;
+            border-left:0;
+            border-top:1px solid var(--line);
+          }
+          .d .platform-mobile-connections{
+            display:block;
+            position:absolute;
+            inset:20px 0 22px;
+            width:100%;
+            height:calc(100% - 42px);
+            pointer-events:none;
+          }
+          .d .platform-mobile-line{
+            fill:none;
+            stroke:#82978c;
+            stroke-width:1;
+            opacity:.72;
+          }
+          .d .platform-mobile-line.primary{
+            stroke:var(--green);
+            stroke-width:1.25;
+            opacity:.82;
+          }
+          .d .platform-mobile-line.secondary{
+            stroke:#82978c;
+            stroke-width:.9;
+            opacity:.56;
+            stroke-dasharray:2 8;
+          }
+          .d .platform-mobile-anchor{fill:var(--paper);stroke:var(--green);stroke-width:1.4;opacity:.9}
+          .d #the-platform .platform-architecture{padding:24px 22px 38px}
+          .d #the-platform .platform-map{
+            min-height:480px;padding:20px 0 22px;
+            display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+            grid-template-rows:118px 118px;gap:202px 48px;
+            align-items:start;background:none;
+          }
+          .d #the-platform .platform-map:before{display:none}
+          .d #the-platform .platform-product{
+            width:auto;min-height:0;margin:0;padding:20px 0 0;
+            align-self:start;order:initial;text-align:left;border-top:1px solid var(--line);
+          }
+          .d #the-platform .platform-product:before{display:none}
+          .d #the-platform .platform-product small{font-size:8px;line-height:1.4}
+          .d #the-platform .platform-product strong{margin:13px 0 0;font-size:22px;line-height:1}
+          .d #the-platform .platform-product>span{display:none}
+          .d #the-platform .product-operations{grid-column:1;grid-row:1}
+          .d #the-platform .product-create{grid-column:2;grid-row:1;text-align:right}
+          .d #the-platform .product-edge{grid-column:1;grid-row:2}
+          .d #the-platform .product-studio{grid-column:2;grid-row:2;text-align:right}
+          .d #the-platform .mop-center{
+            width:150px;min-height:92px;padding:18px 12px;
+            position:absolute;left:50%;top:50%;z-index:3;
+            grid-column:1 / -1;grid-row:1 / -1;
+            display:flex;align-items:center;justify-content:center;
+            transform:translate(-50%,-50%);text-align:center;border:0;background:var(--paper);
+          }
+          .d #the-platform.motion-ready .mop-center,
+          .d #the-platform.motion-ready.motion-active .mop-center{transform:translate(-50%,-50%)!important}
+          .d #the-platform .mop-center small{font-size:7px}
+          .d #the-platform .mop-center strong{margin:7px 0 5px;font-size:34px}
+          .d #the-platform .mop-center span{font-size:7px;line-height:1.45}
+          .d #the-platform .platform-foot{padding-top:18px}
+          .d .ecosystem-section{min-height:0;padding:34px 22px 58px}
+          .d .ecosystem-kicker{gap:18px;line-height:1.5}
+          .d .ecosystem-title{margin:54px 0 48px;font-size:clamp(44px,11.6vw,58px);line-height:1.02}
+          .d .ecosystem-grid{grid-template-columns:1fr}
+          .d .ecosystem-role{
+            min-height:178px;
+            padding:28px 0;
+            border-right:0!important;
+            border-bottom:1px solid var(--line)!important;
+          }
+          .d .ecosystem-role:last-child{border-bottom:0!important}
+          .d .ecosystem-role h3{font-size:34px}
+          .d .ecosystem-role p{font-size:17px}
+          .d #field-leads .philosophy-copy{min-height:460px}
+          .d #field-leads .philosophy-grid{grid-template-columns:minmax(0,1fr)!important}
+          .d .field-value{padding:50px 0 30px}
+          .d .field-value-title{font-size:30px}
+          .d .unconnected-field{height:230px;margin-top:34px}
+          .d{
+            --value-node-fg-size:15px;
+            --value-node-mid-size:12px;
+            --value-node-bg-size:9.5px;
+            --value-node-fg-outline:.7969px;
+            --value-node-mid-outline:.693px;
+            --value-node-bg-outline:.6237px;
+          }
+          .d .field-value-meta{font-size:8px;line-height:1.5}
+          .d .motion-ready [data-motion]{transform:translateY(9px)!important;transition-duration:.3s!important}
+          .d .motion-ready .motion-line{transition-duration:.5s!important}
+          .d #brand-core .hero-node-glow{opacity:.14}
+          .d .from-data-flow{height:260px}
+          .d .evidence-layer-data{left:4%;right:24%;top:12%}
+          .d .evidence-layer-operation{left:12%;right:14%;top:43%}
+          .d .evidence-layer-field{left:21%;right:1%;top:71%}
+          .d .evidence-layer b{font-size:18px}
+          .d .evidence-layer-operation b{font-size:22px}
+          .d .evidence-layer-field b{font-size:30px}
+          .d .evidence-layer small{font-size:7px}
+          .d .evidence-depth-guide{left:11%;top:calc(12% + 41px);height:calc(59% + 12px);width:7%}
+        }
+        @media(prefers-reduced-motion:reduce){
+          .d .motion-ready [data-motion],.d .motion-ready .motion-node{
+            opacity:1!important;transform:none!important;transition:none!important
+          }
+          .d .motion-ready .motion-line{stroke-dashoffset:0!important;transition:none!important}
+          .d .motion-ready .flow-line-motion{transform:none!important;transition:none!important}
+          .d .motion-ready .principle-line{background-size:100% 1px!important;transition:none!important}
+          .d .motion-ready .unconnected-node{filter:blur(var(--depth-blur))!important;transform:none!important;transition:none!important;animation:none!important}
+          .d .motion-ready .unconnected-node.depth-bg{opacity:.46!important}
+          .d .motion-ready .unconnected-node.depth-mid{opacity:.72!important}
+          .d .motion-ready .unconnected-node.depth-fg{opacity:.92!important}
+        }
+      `;
+      doc.head.appendChild(refinement);
+      panel.querySelector('.logo').innerHTML='<span class="own">OWN</span><span class="ground">GROUND</span>';
+      panel.querySelector('.hero-brand').textContent='OWNGROUND';
+      const fromData=doc.createElement('section');
+      fromData.id='from-data';
+      fromData.className='from-data-section';
+      fromData.setAttribute('aria-labelledby','from-data-title');
+      fromData.innerHTML=`
+        <div class="from-data-kicker"><span>02 / FROM DATA</span><span>ORIGIN / DISCOVERY</span></div>
+        <div class="from-data-content">
+          <div class="from-data-copy" data-reveal>
+            <h2 id="from-data-title" class="from-data-title">데이터에서 시작해,<br>현장을 보게 되었습니다.</h2>
+            <div class="from-data-body">
+              <p>데이터를 분석할수록 숫자만으로는 충분하지 않았습니다.<br>그 숫자가 어디에서, 어떻게 만들어지는지를 이해해야 했습니다.</p>
+              <p>좋은 데이터는 좋은 분석보다 먼저,<br>좋은 운영에서 시작됩니다.</p>
+            </div>
+          </div>
+          <aside class="from-data-outcome" data-reveal>
+            <div class="from-data-flow" aria-label="Data의 표면에서 Operation의 맥락을 거쳐 Field라는 근원을 발견하는 세 개의 Evidence Layer">
+              <div class="evidence-layers">
+                <div class="evidence-depth-guide" aria-hidden="true"></div>
+                <div class="evidence-layer evidence-layer-data"><span class="evidence-node" aria-hidden="true"></span><span class="evidence-line"></span><b>DATA</b><small>SURFACE / EVIDENCE</small></div>
+                <div class="evidence-layer evidence-layer-operation"><span class="evidence-node" aria-hidden="true"></span><span class="evidence-line"></span><b>OPERATION</b><small>CONTEXT / PROCESS</small></div>
+                <div class="evidence-layer evidence-layer-field"><span class="evidence-node" aria-hidden="true"></span><span class="evidence-line"></span><b>FIELD</b><small>ORIGIN / SOURCE</small></div>
+              </div>
+            </div>
+            <div class="from-data-conclusion"><small>OBSERVATION / CONCLUSION</small><strong>좋은 운영은<br>현장에서 시작됩니다.</strong></div>
+          </aside>
+        </div>
+      `;
+      panel.querySelector('#field-leads').before(fromData);
+
+      const mainNav=panel.querySelector('.site-head nav');
+      const legacyLogo=panel.querySelector('.site-head .logo');
+      const logoHome=doc.createElement('a');
+      logoHome.className=`${legacyLogo.className} logo-home`;
+      logoHome.href='#brand-core';
+      logoHome.setAttribute('aria-label','OWNGROUND — 01 Hero');
+      logoHome.innerHTML=legacyLogo.innerHTML;
+      legacyLogo.replaceWith(logoHome);
+      mainNav.innerHTML=`<a href="#brand-core">01 / HERO</a><a href="#from-data">02 / FROM DATA</a><a href="#field-leads">03 / FIELD LEADS</a><a href="#the-gap">04 / THE GAP</a><a href="#the-platform">05 / THE PLATFORM</a><a href="#ecosystem">06 / ECOSYSTEM</a>`;
+      const mainNavLinks=[...mainNav.querySelectorAll('a')];
+      const positionNav=panel.querySelector('.position-nav');
+      positionNav.innerHTML=`<a href="#brand-core" aria-current="true" aria-label="01 Hero"><span>01 / HERO</span></a><a href="#from-data" aria-current="false" aria-label="02 From Data"><span>02 / FROM DATA</span></a><a href="#field-leads" aria-current="false" aria-label="03 Field Leads"><span>03 / FIELD LEADS</span></a><a href="#the-gap" aria-current="false" aria-label="04 The Gap"><span>04 / THE GAP</span></a><a href="#the-platform" aria-current="false" aria-label="05 The Platform"><span>05 / THE PLATFORM</span></a><a href="#ecosystem" aria-current="false" aria-label="06 Ecosystem"><span>06 / ECOSYSTEM</span></a>`;
+      panel.querySelector('.section-kicker span:first-child').textContent='03 / PHILOSOPHY';
+      const philosophyCopy=panel.querySelector('#field-leads .philosophy-copy');
+      philosophyCopy.innerHTML=`
+        <small>FIELD FIRST / 03</small>
+        <div class="field-value">
+          <h3 class="field-value-title">가치는 이미 있습니다.<br>필요한 것은 연결입니다.</h3>
+          <div class="unconnected-field" role="img" aria-label="서로 연결되지 않은 채 이미 존재하는 가치의 지점들">
+            <i class="unconnected-node depth-bg group-1" style="--x:9%;--y:22%;--alpha:.48"></i>
+            <i class="unconnected-node depth-bg group-1" style="--x:78%;--y:14%;--alpha:.42"></i>
+            <i class="unconnected-node depth-mid group-2" style="--x:30%;--y:8%;--alpha:.62"></i>
+            <i class="unconnected-node depth-mid group-2" style="--x:47%;--y:42%;--alpha:.58"></i>
+            <i class="unconnected-node depth-fg group-3" style="--x:17%;--y:54%;--alpha:.72"></i>
+            <i class="unconnected-node depth-bg group-3" style="--x:61%;--y:79%;--alpha:.44"></i>
+            <i class="unconnected-node depth-fg group-4" style="--x:72%;--y:48%;--alpha:.72"></i>
+            <i class="unconnected-node signal depth-mid group-4" style="--x:54%;--y:20%"></i>
+            <i class="unconnected-node signal depth-mid group-5" style="--x:88%;--y:70%"></i>
+            <i class="unconnected-node signal depth-fg group-5" style="--x:35%;--y:76%"></i>
+          </div>
+        </div>
+        <div class="field-value-meta"><span>VALUE / PRESENT</span><span>CONNECTION / ABSENT</span></div>
+      `;
+      panel.querySelector('.story-index').textContent='04 / THE GAP';
+      // Internal Narrative Model only: Operational = flow gap; Context = meaning gap; Connection = structural condition.
+      panel.querySelector('.network-panel>small').textContent='CONNECTION NETWORK / 04';
+      panel.querySelector('.gap-close small').textContent='CONNECTION / 04';
+      panel.querySelector('.platform-index').textContent='05 / THE PLATFORM';
+      panel.querySelector('.platform-head h2').innerHTML='필요한 연결이<br>하나의 제조환경을 만듭니다.';
+      const platformName=panel.querySelector('.platform-head p');
+      platformName.className='platform-name';
+      platformName.textContent='Manufacturing Operations Platform';
+      panel.querySelector('.platform-architecture-head span').textContent='OWNGROUND MOP / 05';
+      panel.querySelector('.mop-center small').textContent='OWNGROUND';
+      const platformConnections=panel.querySelector('.platform-connections');
+      platformConnections.innerHTML=`
+        <defs>
+          <mask id="platformTextSafe" maskUnits="userSpaceOnUse">
+            <rect width="1200" height="650" fill="white"/>
+            <rect class="platform-safe-zone" x="514" y="252" width="172" height="146" rx="48" fill="black"/>
+          </mask>
+        </defs>
+        <g mask="url(#platformTextSafe)">
+        <path class="platform-line primary" d="M245 160 C432 112 650 242 955 160"/>
+        <path class="platform-line secondary" d="M245 160 C510 72 824 86 955 490"/>
+        <path class="platform-line primary" d="M245 160 C410 238 366 420 245 490"/>
+        <path class="platform-line primary" d="M245 490 C506 580 824 564 955 160"/>
+        <path class="platform-line secondary" d="M245 490 C474 566 760 518 955 490"/>
+        <path class="platform-line primary" d="M955 160 C792 232 816 396 955 490"/>
+        <path class="platform-line secondary dotted" d="M955 160 C820 188 748 224 680 260 M520 390 C446 424 360 470 245 490"/>
+        <path class="platform-line secondary" d="M245 160 C382 286 420 330 514 342 M686 314 C790 298 836 246 955 160"/>
+        </g>
+        <circle class="platform-line-node" cx="245" cy="160" r="7"/>
+        <circle class="platform-line-node" cx="955" cy="160" r="7"/>
+        <circle class="platform-line-node" cx="245" cy="490" r="7"/>
+        <circle class="platform-line-node" cx="955" cy="490" r="7"/>
+        <circle class="platform-signal-node active" cx="424" cy="151" r="3"/>
+        <circle class="platform-signal-node" cx="710" cy="214" r="3"/>
+        <circle class="platform-signal-node active" cx="402" cy="402" r="3"/>
+        <circle class="platform-signal-node" cx="778" cy="443" r="3"/>
+      `;
+      const mobileConnections=doc.createElementNS('http://www.w3.org/2000/svg','svg');
+      mobileConnections.setAttribute('class','platform-mobile-connections');
+      mobileConnections.setAttribute('viewBox','0 0 346 438');
+      mobileConnections.setAttribute('preserveAspectRatio','none');
+      mobileConnections.setAttribute('aria-hidden','true');
+      mobileConnections.innerHTML=`
+        <defs>
+          <mask id="platformMobileTextSafe" maskUnits="userSpaceOnUse">
+            <rect width="346" height="438" fill="white"/>
+            <rect x="92" y="164" width="162" height="110" rx="34" fill="black"/>
+          </mask>
+        </defs>
+        <g mask="url(#platformMobileTextSafe)">
+          <path class="platform-mobile-line primary" d="M34 86 C80 132 76 304 34 352"/>
+          <path class="platform-mobile-line primary" d="M34 86 C116 38 232 50 312 86"/>
+          <path class="platform-mobile-line primary" d="M312 86 C270 142 272 296 312 352"/>
+          <path class="platform-mobile-line secondary" d="M34 86 C126 134 216 304 312 352"/>
+          <path class="platform-mobile-line secondary" d="M312 86 C244 150 116 284 34 352"/>
+        </g>
+        <circle class="platform-mobile-anchor" cx="34" cy="86" r="5"/>
+        <circle class="platform-mobile-anchor" cx="312" cy="86" r="5"/>
+        <circle class="platform-mobile-anchor" cx="34" cy="352" r="5"/>
+        <circle class="platform-mobile-anchor" cx="312" cy="352" r="5"/>
+      `;
+      panel.querySelector('.platform-map').appendChild(mobileConnections);
+      const ecosystem=doc.createElement('section');
+      ecosystem.id='ecosystem';
+      ecosystem.className='ecosystem-section';
+      ecosystem.setAttribute('aria-labelledby','ecosystem-title');
+      ecosystem.innerHTML=`
+        <div class="ecosystem-kicker" data-motion><span>06 / ECOSYSTEM</span><span>PRODUCTS / ROLES</span></div>
+        <h2 id="ecosystem-title" class="ecosystem-title" data-motion>하나의 플랫폼,<br>서로 다른 네 개의 역할.</h2>
+        <div class="ecosystem-grid" aria-label="OWNGROUND 제품별 역할">
+          <article class="ecosystem-role" data-motion><small>01 / OPERATIONS</small><div><h3>OPERATIONS</h3><p>제조 운영의 흐름을 보고 판단합니다.</p></div></article>
+          <article class="ecosystem-role" data-motion><small>02 / CREATE</small><div><h3>CREATE</h3><p>설계정보와 판단의 맥락을 연결합니다.</p></div></article>
+          <article class="ecosystem-role" data-motion><small>03 / EDGE</small><div><h3>EDGE</h3><p>현장의 신호를 사용할 수 있는 정보로 연결합니다.</p></div></article>
+          <article class="ecosystem-role" data-motion><small>04 / STUDIO</small><div><h3>STUDIO</h3><p>복잡한 데이터를 실제 업무로 가져옵니다.</p></div></article>
+        </div>
+      `;
+      panel.querySelector('#the-platform').after(ecosystem);
+      panel.querySelectorAll('[aria-label]').forEach(element=>element.setAttribute('aria-label',element.getAttribute('aria-label').replaceAll('OWNGROUND','OWNGROUND')));
+      const localeApi=window.OWNGROUND_I18N;
+      const localeParam=new URLSearchParams(window.location.search).get('lang');
+      const availableLocales=localeApi.contract.active.filter(locale=>localeApi.registry[locale]?.enabled&&localeApi.completeness(locale));
+      let activeLocale=availableLocales.includes(localeParam)?localeParam:localeApi.contract.canonical;
+      const legacyLocaleCell=panel.querySelector('.contact-mail');
+      const localeControl=doc.createElement('div');
+      localeControl.className='contact-mail locale-control';
+      localeControl.innerHTML=`<button class="locale-switch" type="button" aria-haspopup="listbox" aria-expanded="false"><span></span></button><div class="locale-menu" role="listbox" hidden>${availableLocales.map(locale=>`<button type="button" role="option" data-locale="${locale}">${locale.toUpperCase()}</button>`).join('')}</div>`;
+      legacyLocaleCell.replaceWith(localeControl);
+      const legacyIssue=panel.querySelector('.site-head .issue');
+      const headerContact=doc.createElement('a');
+      headerContact.className='issue header-contact';
+      headerContact.href='mailto:contact@ownground.kr';
+      headerContact.setAttribute('aria-label','OWNGROUND에 이메일 보내기');
+      headerContact.textContent='contact@ownground.kr';
+      legacyIssue.replaceWith(headerContact);
+      const localeSwitch=localeControl.querySelector('.locale-switch');
+      const localeMenu=localeControl.querySelector('.locale-menu');
+      const renderLocaleSwitch=()=>{
+        localeSwitch.querySelector('span').textContent=activeLocale.toUpperCase();
+        localeSwitch.setAttribute('aria-label',`Language: ${localeApi.registry[activeLocale].name}`);
+        localeMenu.querySelectorAll('[data-locale]').forEach(option=>option.setAttribute('aria-current',String(option.dataset.locale===activeLocale)));
+      };
+      const applyLocale=locale=>{
+        activeLocale=localeApi.apply(doc,panel,locale);
+        document.documentElement.lang=activeLocale;
+        preview.title=`OWNGROUND — ${localeApi.registry[activeLocale].name}`;
+        const url=new URL(window.location.href);
+        url.searchParams.set('lang',activeLocale);
+        window.history.replaceState(null,'',`${url.pathname}${url.search}${url.hash}`);
+        renderLocaleSwitch();
+      };
+      const closeLocaleMenu=()=>{
+        localeMenu.hidden=true;
+        localeSwitch.setAttribute('aria-expanded','false');
+      };
+      localeSwitch.addEventListener('click',()=>{
+        const willOpen=localeMenu.hidden;
+        localeMenu.hidden=!willOpen;
+        localeSwitch.setAttribute('aria-expanded',String(willOpen));
+      });
+      localeMenu.addEventListener('click',event=>{
+        const option=event.target.closest('[data-locale]');
+        if(!option)return;
+        applyLocale(option.dataset.locale);
+        closeLocaleMenu();
+      });
+      doc.addEventListener('click',event=>{if(!localeControl.contains(event.target))closeLocaleMenu()});
+      doc.addEventListener('keydown',event=>{if(event.key==='Escape'){closeLocaleMenu();localeSwitch.focus()}});
+      applyLocale(activeLocale);
+      const journeySections=[panel.querySelector('#brand-core'),fromData,panel.querySelector('#field-leads'),panel.querySelector('#the-gap'),panel.querySelector('#the-platform'),ecosystem];
+      const journeyLinks=[...positionNav.querySelectorAll('a')];
+
+      /* Motion hooks only: existing copy, layout, color and graphic structure stay intact. */
+      const addMotion=(selector,delay=0)=>panel.querySelectorAll(selector).forEach((element,index)=>{
+        element.dataset.motion='';
+        element.style.setProperty('--motion-delay',`${delay+index*70}ms`);
+      });
+      addMotion('#brand-core .kicker,#brand-core .hero-brand,#brand-core .hero-title,#brand-core .hero-platform',0);
+      addMotion('#brand-core .hero-bridge>small,#brand-core .hero-axis,#brand-core .hero-bridge-foot',180);
+      panel.querySelectorAll('#brand-core svg path').forEach(path=>{path.classList.add('motion-line');path.setAttribute('pathLength','1')});
+      panel.querySelectorAll('#brand-core svg circle:not(.hero-node-glow)').forEach(node=>node.classList.add('motion-node'));
+      const heroPrimaryNode=panel.querySelector('#brand-core .hero-node.primary');
+      heroPrimaryNode.setAttribute('r','3.5');
+      addMotion('#from-data .from-data-copy',0);
+      const fromDataSteps=[...panel.querySelectorAll('#from-data .evidence-layer')];
+      [140,360,590].forEach((delay,index)=>{
+        const step=fromDataSteps[index];
+        step.dataset.motion='';
+        step.style.setProperty('--motion-delay',`${delay}ms`);
+        const line=step.querySelector('.evidence-line');
+        line.classList.add('flow-line-motion');
+        line.style.setProperty('--motion-delay',`${delay+90}ms`);
+      });
+      addMotion('#from-data .from-data-conclusion',760);
+      addMotion('#field-leads .section-kicker',0);
+      addMotion('#field-leads .philosophy-label',80);
+      addMotion('#field-leads .philosophy-title',150);
+      addMotion('#field-leads .philosophy-body-inline',240);
+      addMotion('#field-leads .philosophy-copy>small',190);
+      addMotion('#field-leads .field-value-title',300);
+      addMotion('#field-leads .field-value-meta',530);
+      addMotion('#the-gap .story-head',0);
+      addMotion('#the-gap .gap-relation',130);
+      addMotion('#the-gap .network-panel',250);
+      addMotion('#the-gap .gap-close',420);
+      panel.querySelectorAll('#the-gap .network-line').forEach((path,index)=>{path.classList.add('motion-line');path.setAttribute('pathLength','1');path.style.setProperty('--motion-delay',`${230+index*34}ms`)});
+      panel.querySelectorAll('#the-gap .network-node').forEach((node,index)=>{node.classList.add('motion-node');node.style.setProperty('--motion-delay',`${420+index*28}ms`)});
+      addMotion('#the-platform .platform-head',0);
+      addMotion('#the-platform .platform-product',170);
+      addMotion('#the-platform .mop-center',410);
+      panel.querySelectorAll('#the-platform .platform-line').forEach((path,index)=>{path.classList.add('motion-line');path.setAttribute('pathLength','1');path.style.setProperty('--motion-delay',`${220+index*35}ms`)});
+      panel.querySelectorAll('#the-platform .platform-mobile-line').forEach((path,index)=>{path.classList.add('motion-line');path.setAttribute('pathLength','1');path.style.setProperty('--motion-delay',`${260+index*42}ms`)});
+      panel.querySelectorAll('#the-platform .platform-line-node,#the-platform .platform-signal-node,#the-platform .platform-mobile-anchor').forEach((node,index)=>{node.classList.add('motion-node');node.style.setProperty('--motion-delay',`${190+index*25}ms`)});
+      journeySections.forEach(section=>section.classList.add('motion-ready'));
+
+      const motionState=new Map(journeySections.map(section=>[section,{status:'unseen',playing:false,replays:0}]));
+      let navigationTarget=null;
+      let navigationSequence=0;
+      const reducedMotion=doc.defaultView.matchMedia('(prefers-reduced-motion: reduce)');
+      const replaySection=(section,source='scroll')=>{
+        const state=motionState.get(section);
+        if(!state)return;
+        section.classList.add('motion-reset');
+        section.classList.remove('motion-active');
+        void section.offsetWidth;
+        section.classList.remove('motion-reset');
+        void section.offsetWidth;
+        section.classList.add('motion-active');
+        state.status='entered';
+        state.replays+=1;
+        state.playing=!reducedMotion.matches;
+        doc.defaultView.setTimeout(()=>{state.playing=false},1200);
+        section.dataset.motionSource=source;
+        section.dataset.motionReplay=String(state.replays);
+      };
+      const updateMotion=(initial=false)=>{
+        const headerHeight=panel.querySelector('.site-head').getBoundingClientRect().height;
+        const viewportHeight=doc.defaultView.innerHeight;
+        const initialProbe=headerHeight+(viewportHeight-headerHeight)*.32;
+        journeySections.forEach(section=>{
+          const state=motionState.get(section);
+          const rect=section.getBoundingClientRect();
+          const contentTop=headerHeight;
+          const visible=Math.max(0,Math.min(rect.bottom,viewportHeight)-Math.max(rect.top,contentTop));
+          const enterThreshold=Math.min(rect.height*.18,(viewportHeight-headerHeight)*.28);
+          const fullyExited=rect.bottom<contentTop-120||rect.top>viewportHeight+120;
+          if(initial){
+            const ownsInitialProbe=rect.top<=initialProbe&&rect.bottom>initialProbe;
+            if(ownsInitialProbe&&visible>=enterThreshold)replaySection(section,'initial');
+            return;
+          }
+          if(fullyExited){
+            if(state.status==='entered')state.status='exited';
+            section.classList.remove('motion-active');
+            return;
+          }
+          if(state.status!=='entered'&&visible>=enterThreshold&&navigationTarget!==section)replaySection(section,'scroll');
+        });
+      };
+      const syncJourney=()=>{
+        const headerHeight=panel.querySelector('.site-head').getBoundingClientRect().height;
+        const probe=headerHeight+(doc.defaultView.innerHeight-headerHeight)*.32;
+        const detectedIndex=journeySections.findIndex(section=>{const rect=section.getBoundingClientRect();return rect.top<=probe&&rect.bottom>probe});
+        const currentIndex=detectedIndex<0?journeySections.length-1:detectedIndex;
+        const current=journeySections[currentIndex];
+        journeyLinks.forEach((link,index)=>{
+          const distance=Math.abs(index-currentIndex);
+          link.setAttribute('aria-current',String(link.hash===`#${current.id}`));
+          link.dataset.distance=distance<=2?String(distance):'far';
+        });
+        mainNavLinks.forEach(link=>{
+          if(link.hash===`#${current.id}`)link.setAttribute('aria-current','page');
+          else link.removeAttribute('aria-current');
+        });
+      };
+      let journeyFrame=0;
+      doc.defaultView.addEventListener('scroll',()=>{
+        if(journeyFrame)return;
+        journeyFrame=doc.defaultView.requestAnimationFrame(()=>{journeyFrame=0;syncJourney();updateMotion()});
+      },{passive:true});
+      doc.defaultView.addEventListener('resize',()=>{syncJourney();updateMotion()});
+      panel.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+        anchor.addEventListener('click',event=>{
+          const id=anchor.getAttribute('href').slice(1);
+          const target=doc.getElementById(id);
+          if(!target)return;
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          const headerHeight=panel.querySelector('.site-head').getBoundingClientRect().height;
+          const sequence=++navigationSequence;
+          navigationTarget=target;
+          target.classList.remove('motion-active');
+          const targetState=motionState.get(target);
+          if(targetState)targetState.playing=false;
+          doc.defaultView.scrollTo(0,Math.max(0,target.offsetTop-headerHeight));
+          doc.defaultView.history.replaceState(null,'',`#${id}`);
+          anchor.blur();
+          syncJourney();
+          const completeNavigation=()=>{
+            if(sequence!==navigationSequence)return;
+            const currentHeaderHeight=panel.querySelector('.site-head').getBoundingClientRect().height;
+            const targetTop=target.getBoundingClientRect().top;
+            const maxScroll=doc.documentElement.scrollHeight-doc.defaultView.innerHeight;
+            const reachedTop=Math.abs(targetTop-currentHeaderHeight)<=2;
+            const reachedPageEnd=doc.defaultView.scrollY>=maxScroll-2&&targetTop<=currentHeaderHeight;
+            if(!reachedTop&&!reachedPageEnd){
+              doc.defaultView.requestAnimationFrame(completeNavigation);
+              return;
+            }
+            replaySection(target,'navigation');
+            navigationTarget=null;
+            syncJourney();
+          };
+          doc.defaultView.requestAnimationFrame(completeNavigation);
+        },true);
+      });
+      const directTarget=doc.getElementById(window.location.hash.slice(1));
+      if(directTarget){
+        const headerHeight=panel.querySelector('.site-head').getBoundingClientRect().height;
+        doc.defaultView.scrollTo(0,Math.max(0,directTarget.offsetTop-headerHeight));
+        doc.defaultView.history.replaceState(null,'',`#${directTarget.id}`);
+      }
+      syncJourney();
+      updateMotion(true);
+      preview.style.visibility='visible';
+    },{once:true});
+  </script>
+</body>
+</html>
