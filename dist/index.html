@@ -733,6 +733,8 @@
       panel.querySelector('#field-leads').before(fromData);
 
 
+
+
       const mainNav=panel.querySelector('.site-head nav');
       const legacyLogo=panel.querySelector('.site-head .logo');
       const logoHome=doc.createElement('a');
@@ -899,6 +901,8 @@
       const journeyLinks=[...positionNav.querySelectorAll('a')];
 
 
+
+
       /* Motion hooks only: existing copy, layout, color and graphic structure stay intact. */
       const addMotion=(selector,delay=0)=>panel.querySelectorAll(selector).forEach((element,index)=>{
         element.dataset.motion='';
@@ -996,6 +1000,8 @@
       journeySections.forEach(section=>section.classList.add('motion-ready'));
 
 
+
+
       const motionState=new Map(journeySections.map(section=>[section,{status:'unseen',playing:false,replays:0}]));
       let navigationTarget=null;
       let navigationSequence=0;
@@ -1085,8 +1091,9 @@
             const targetTop=target.getBoundingClientRect().top;
             const maxScroll=doc.documentElement.scrollHeight-doc.defaultView.innerHeight;
             const reachedTop=Math.abs(targetTop-currentHeaderHeight)<=2;
+            const reachedPageStart=target===journeySections[0]&&doc.defaultView.scrollY<=2;
             const reachedPageEnd=doc.defaultView.scrollY>=maxScroll-2&&targetTop<=currentHeaderHeight;
-            if(!reachedTop&&!reachedPageEnd){
+            if(!reachedTop&&!reachedPageStart&&!reachedPageEnd){
               doc.defaultView.requestAnimationFrame(completeNavigation);
               return;
             }
