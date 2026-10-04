@@ -735,6 +735,10 @@
 
 
 
+
+
+
+
       const mainNav=panel.querySelector('.site-head nav');
       const legacyLogo=panel.querySelector('.site-head .logo');
       const logoHome=doc.createElement('a');
@@ -903,6 +907,10 @@
 
 
 
+
+
+
+
       /* Motion hooks only: existing copy, layout, color and graphic structure stay intact. */
       const addMotion=(selector,delay=0)=>panel.querySelectorAll(selector).forEach((element,index)=>{
         element.dataset.motion='';
@@ -1002,25 +1010,36 @@
 
 
 
-      const motionState=new Map(journeySections.map(section=>[section,{status:'unseen',playing:false,replays:0}]));
+
+
+
+
+      const motionState=new Map(journeySections.map(section=>[section,{status:'unseen',playing:false,replays:0,replayToken:0}]));
       let navigationTarget=null;
       let navigationSequence=0;
       const reducedMotion=doc.defaultView.matchMedia('(prefers-reduced-motion: reduce)');
       const replaySection=(section,source='scroll')=>{
         const state=motionState.get(section);
         if(!state)return;
+        const replayToken=++state.replayToken;
         section.classList.add('motion-reset');
         section.classList.remove('motion-active');
         void section.offsetWidth;
-        section.classList.remove('motion-reset');
-        void section.offsetWidth;
-        section.classList.add('motion-active');
         state.status='entered';
         state.replays+=1;
-        state.playing=!reducedMotion.matches;
-        doc.defaultView.setTimeout(()=>{state.playing=false},1500);
         section.dataset.motionSource=source;
         section.dataset.motionReplay=String(state.replays);
+        doc.defaultView.requestAnimationFrame(()=>{
+          if(state.replayToken!==replayToken)return;
+          section.classList.remove('motion-reset');
+          void section.offsetWidth;
+          doc.defaultView.requestAnimationFrame(()=>{
+            if(state.replayToken!==replayToken)return;
+            section.classList.add('motion-active');
+            state.playing=!reducedMotion.matches;
+            doc.defaultView.setTimeout(()=>{if(state.replayToken===replayToken)state.playing=false},1500);
+          });
+        });
       };
       const updateMotion=(initial=false)=>{
         const headerHeight=panel.querySelector('.site-head').getBoundingClientRect().height;
