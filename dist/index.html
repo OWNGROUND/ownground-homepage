@@ -203,7 +203,7 @@
           background:transparent;
           box-shadow:inset 0 0 0 var(--outline) var(--node-stroke-color);
         }
-        .d .unconnected-node.signal{--node-opacity:.9!important;--node-stroke-color:var(--green);opacity:.9!important}
+        .d .unconnected-node.signal{--node-opacity:.9!important;--node-stroke-color:var(--green)}
         .d{
           --value-node-fg-size:clamp(22.5469px,1.7622vw,25.375px);
           --value-node-mid-size:clamp(17.2031px,1.3433vw,19.3438px);
@@ -382,19 +382,9 @@
           z-index:1;
           text-shadow:none;
         }
-        .d #the-platform [data-reveal],
-        .d #the-platform [data-reveal].is-visible{
-          opacity:1!important;
-          visibility:visible!important;
-          transform:none!important;
-          transition:none!important;
-          animation:none!important;
-        }
         @media(min-width:901px){
           .d #the-platform .platform-connections{
             display:block!important;
-            opacity:1!important;
-            visibility:visible!important;
           }
         }
         .d .mop-center strong{font-size:clamp(32px,2.5vw,38px)}
@@ -525,6 +515,13 @@
           transition-delay:var(--motion-delay,180ms)!important;
         }
         .d .motion-ready.motion-active .motion-line{stroke-dashoffset:0}
+        .d .motion-ready .motion-reveal-mask{
+          stroke-dasharray:1;
+          stroke-dashoffset:1;
+          transition:stroke-dashoffset .68s cubic-bezier(.35,0,.2,1)!important;
+          transition-delay:var(--motion-delay,180ms)!important;
+        }
+        .d .motion-ready.motion-active .motion-reveal-mask{stroke-dashoffset:0}
         .d .motion-ready .flow-line-motion{
           transform:scaleX(0);
           transition:transform .46s cubic-bezier(.35,0,.2,1)!important;
@@ -546,10 +543,6 @@
           transition-delay:var(--motion-delay,420ms)!important;
         }
         .d .motion-ready.motion-active .motion-node{opacity:1!important;transform:scale(1)}
-        .d .motion-ready.motion-active .ecosystem-role:nth-child(1){--motion-delay:160ms}
-        .d .motion-ready.motion-active .ecosystem-role:nth-child(2){--motion-delay:230ms}
-        .d .motion-ready.motion-active .ecosystem-role:nth-child(3){--motion-delay:300ms}
-        .d .motion-ready.motion-active .ecosystem-role:nth-child(4){--motion-delay:370ms}
         @media(max-width:900px){
           .d .site-head{padding:0 12px!important;display:grid!important;grid-template-columns:auto 58px minmax(116px,1fr)}
           .d .logo-home{font-size:15px}
@@ -680,7 +673,7 @@
           }
           .d .field-value-meta{font-size:8px;line-height:1.5}
           .d .motion-ready [data-motion]{transform:translateY(9px)!important;transition-duration:.3s!important}
-          .d .motion-ready .motion-line{transition-duration:.5s!important}
+          .d .motion-ready .motion-line,.d .motion-ready .motion-reveal-mask{transition-duration:.5s!important}
           .d #brand-core .hero-node-glow{opacity:.14}
           .d .from-data-flow{height:260px}
           .d .evidence-layer-data{left:4%;right:24%;top:12%}
@@ -693,10 +686,12 @@
           .d .evidence-depth-guide{left:11%;top:calc(12% + 41px);height:calc(59% + 12px);width:7%}
         }
         @media(prefers-reduced-motion:reduce){
+          .d #the-platform.motion-ready [data-motion],
+          .d .from-data-section.motion-ready [data-motion],
           .d .motion-ready [data-motion],.d .motion-ready .motion-node{
             opacity:1!important;transform:none!important;transition:none!important
           }
-          .d .motion-ready .motion-line{stroke-dashoffset:0!important;transition:none!important}
+          .d .motion-ready .motion-line,.d .motion-ready .motion-reveal-mask{stroke-dashoffset:0!important;transition:none!important}
           .d .motion-ready .flow-line-motion{transform:none!important;transition:none!important}
           .d .motion-ready .principle-line{background-size:100% 1px!important;transition:none!important}
           .d .motion-ready .unconnected-node{filter:blur(var(--depth-blur))!important;transform:none!important;transition:none!important;animation:none!important}
@@ -736,6 +731,7 @@
         </div>
       `;
       panel.querySelector('#field-leads').before(fromData);
+
 
       const mainNav=panel.querySelector('.site-head nav');
       const legacyLogo=panel.querySelector('.site-head .logo');
@@ -902,10 +898,46 @@
       const journeySections=[panel.querySelector('#brand-core'),fromData,panel.querySelector('#field-leads'),panel.querySelector('#the-gap'),panel.querySelector('#the-platform'),ecosystem];
       const journeyLinks=[...positionNav.querySelectorAll('a')];
 
+
       /* Motion hooks only: existing copy, layout, color and graphic structure stay intact. */
       const addMotion=(selector,delay=0)=>panel.querySelectorAll(selector).forEach((element,index)=>{
         element.dataset.motion='';
         element.style.setProperty('--motion-delay',`${delay+index*70}ms`);
+      });
+      const addLineMotion=(paths,start,step=36)=>paths.forEach((path,index)=>{
+        path.classList.add('motion-line');
+        path.setAttribute('pathLength','1');
+        path.style.setProperty('--motion-delay',`${start+index*step}ms`);
+      });
+      let revealMaskSequence=0;
+      const addDottedLineMotion=(paths,start,step=40)=>paths.forEach((path,index)=>{
+        const svg=path.ownerSVGElement;
+        const viewBox=svg.viewBox.baseVal;
+        let defs=svg.querySelector('defs');
+        if(!defs){
+          defs=doc.createElementNS('http://www.w3.org/2000/svg','defs');
+          svg.prepend(defs);
+        }
+        const mask=doc.createElementNS('http://www.w3.org/2000/svg','mask');
+        const maskId=`line-reveal-${++revealMaskSequence}`;
+        mask.id=maskId;
+        mask.setAttribute('maskUnits','userSpaceOnUse');
+        mask.setAttribute('x',String(viewBox.x-20));
+        mask.setAttribute('y',String(viewBox.y-20));
+        mask.setAttribute('width',String(viewBox.width+40));
+        mask.setAttribute('height',String(viewBox.height+40));
+        const reveal=doc.createElementNS('http://www.w3.org/2000/svg','path');
+        reveal.setAttribute('d',path.getAttribute('d'));
+        reveal.setAttribute('pathLength','1');
+        reveal.setAttribute('fill','none');
+        reveal.setAttribute('stroke','white');
+        reveal.setAttribute('stroke-width','8');
+        reveal.setAttribute('stroke-linecap','round');
+        reveal.classList.add('motion-reveal-mask');
+        reveal.style.setProperty('--motion-delay',`${start+index*step}ms`);
+        mask.appendChild(reveal);
+        defs.appendChild(mask);
+        path.setAttribute('mask',`url(#${maskId})`);
       });
       addMotion('#brand-core .kicker,#brand-core .hero-brand,#brand-core .hero-title,#brand-core .hero-platform',0);
       addMotion('#brand-core .hero-bridge>small,#brand-core .hero-axis,#brand-core .hero-bridge-foot',180);
@@ -931,19 +963,38 @@
       addMotion('#field-leads .philosophy-copy>small',190);
       addMotion('#field-leads .field-value-title',300);
       addMotion('#field-leads .field-value-meta',530);
+      const valueNodes=[...panel.querySelectorAll('#field-leads .unconnected-node')];
+      const timedValueNodes=[
+        ...valueNodes.filter(node=>node.classList.contains('depth-bg')&&!node.classList.contains('signal')),
+        ...valueNodes.filter(node=>node.classList.contains('depth-mid')&&!node.classList.contains('signal')),
+        ...valueNodes.filter(node=>node.classList.contains('depth-fg')&&!node.classList.contains('signal')),
+        ...valueNodes.filter(node=>node.classList.contains('signal'))
+      ];
+      timedValueNodes.forEach((node,index)=>node.style.setProperty('--node-delay',`${420+index*42}ms`));
       addMotion('#the-gap .story-head',0);
-      addMotion('#the-gap .gap-relation',130);
-      addMotion('#the-gap .network-panel',250);
-      addMotion('#the-gap .gap-close',420);
-      panel.querySelectorAll('#the-gap .network-line').forEach((path,index)=>{path.classList.add('motion-line');path.setAttribute('pathLength','1');path.style.setProperty('--motion-delay',`${230+index*34}ms`)});
-      panel.querySelectorAll('#the-gap .network-node').forEach((node,index)=>{node.classList.add('motion-node');node.style.setProperty('--motion-delay',`${420+index*28}ms`)});
+      addMotion('#the-gap .gap-relation',110);
+      addMotion('#the-gap .network-panel',360);
+      addMotion('#the-gap .gap-close',1080);
+      const gapLines=[...panel.querySelectorAll('#the-gap .network-line')];
+      addLineMotion(gapLines.filter(path=>path.classList.contains('primary')),740,55);
+      addLineMotion(gapLines.filter(path=>!path.classList.contains('primary')),850,28);
+      panel.querySelectorAll('#the-gap .network-node').forEach((node,index)=>{node.classList.add('motion-node');node.style.setProperty('--motion-delay',`${980+index*24}ms`)});
       addMotion('#the-platform .platform-head',0);
-      addMotion('#the-platform .platform-product',170);
-      addMotion('#the-platform .mop-center',410);
-      panel.querySelectorAll('#the-platform .platform-line').forEach((path,index)=>{path.classList.add('motion-line');path.setAttribute('pathLength','1');path.style.setProperty('--motion-delay',`${220+index*35}ms`)});
-      panel.querySelectorAll('#the-platform .platform-mobile-line').forEach((path,index)=>{path.classList.add('motion-line');path.setAttribute('pathLength','1');path.style.setProperty('--motion-delay',`${260+index*42}ms`)});
-      panel.querySelectorAll('#the-platform .platform-line-node,#the-platform .platform-signal-node,#the-platform .platform-mobile-anchor').forEach((node,index)=>{node.classList.add('motion-node');node.style.setProperty('--motion-delay',`${190+index*25}ms`)});
+      addMotion('#the-platform .platform-product',200);
+      addMotion('#the-platform .mop-center',980);
+      const desktopPlatformLines=[...panel.querySelectorAll('#the-platform .platform-line')];
+      addLineMotion(desktopPlatformLines.filter(path=>path.classList.contains('primary')),500,42);
+      addLineMotion(desktopPlatformLines.filter(path=>path.classList.contains('secondary')&&!path.classList.contains('dotted')),690,34);
+      addDottedLineMotion(desktopPlatformLines.filter(path=>path.classList.contains('dotted')),760);
+      const mobilePlatformLines=[...panel.querySelectorAll('#the-platform .platform-mobile-line')];
+      addLineMotion(mobilePlatformLines.filter(path=>path.classList.contains('primary')),500,48);
+      addDottedLineMotion(mobilePlatformLines.filter(path=>path.classList.contains('secondary')),700,48);
+      panel.querySelectorAll('#the-platform .platform-line-node,#the-platform .platform-signal-node,#the-platform .platform-mobile-anchor').forEach((node,index)=>{node.classList.add('motion-node');node.style.setProperty('--motion-delay',`${850+index*26}ms`)});
+      addMotion('#ecosystem .ecosystem-kicker',0);
+      addMotion('#ecosystem .ecosystem-title',90);
+      addMotion('#ecosystem .ecosystem-role',260);
       journeySections.forEach(section=>section.classList.add('motion-ready'));
+
 
       const motionState=new Map(journeySections.map(section=>[section,{status:'unseen',playing:false,replays:0}]));
       let navigationTarget=null;
@@ -961,7 +1012,7 @@
         state.status='entered';
         state.replays+=1;
         state.playing=!reducedMotion.matches;
-        doc.defaultView.setTimeout(()=>{state.playing=false},1200);
+        doc.defaultView.setTimeout(()=>{state.playing=false},1500);
         section.dataset.motionSource=source;
         section.dataset.motionReplay=String(state.replays);
       };
@@ -1052,9 +1103,11 @@
         doc.defaultView.scrollTo(0,Math.max(0,directTarget.offsetTop-headerHeight));
         doc.defaultView.history.replaceState(null,'',`#${directTarget.id}`);
       }
-      syncJourney();
-      updateMotion(true);
       preview.style.visibility='visible';
+      doc.defaultView.requestAnimationFrame(()=>doc.defaultView.requestAnimationFrame(()=>{
+        syncJourney();
+        updateMotion(true);
+      }));
     },{once:true});
   </script>
 </body>
