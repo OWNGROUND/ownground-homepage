@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">OWNGROUND Glow Ring</title>
+  <desc id="desc">A restrained emerald ring centered on a deep charcoal square.</desc>
+  <defs>
+    <linearGradient id="ring" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#00b96b"/>
+      <stop offset="0.52" stop-color="#22e985"/>
+      <stop offset="1" stop-color="#8af6b6"/>
+    </linearGradient>
+    <filter id="glow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feFlood flood-color="#20e783" flood-opacity="0.28"/>
+      <feComposite in2="blur" operator="in"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="76" fill="#0d1110"/>
+  <circle cx="256" cy="256" r="144" fill="none" stroke="url(#ring)" stroke-width="64" filter="url(#glow)"/>
+</svg>

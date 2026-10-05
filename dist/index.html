@@ -17,7 +17,10 @@
   <meta name="twitter:description" content="제조 현장의 데이터와 운영, 사람과 시스템을 하나의 흐름으로 연결합니다.">
   <meta name="twitter:image" content="https://ownground.kr/og-ownground.svg">
   <title>OWNGROUND | 제조의 오늘과 내일을 잇습니다.</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111915'/%3E%3Ccircle cx='16' cy='16' r='7.5' fill='none' stroke='%2383cda3' stroke-width='3.4'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="icon" href="./favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+  <link rel="manifest" href="./site.webmanifest">
   <script src="./locales.js"></script>
   <style>
     html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#f7f8f5}
@@ -34,9 +37,11 @@
       const refinement=doc.createElement('style');
       refinement.textContent=`
         html{scroll-behavior:auto!important}
-        /* OWNGROUND transition refinement: agency-led wordmark. */
-        .d .logo .own{color:var(--green)}
-        .d .logo .ground{color:var(--ink)}
+        /* Official OWNGROUND identity asset integration. */
+        .d .logo-home{width:196px;min-width:196px;height:48px;display:flex;align-items:center;color:inherit;text-decoration:none}
+        .d .logo-home img{display:block;height:auto;object-fit:contain}
+        .d .logo-home .logo-wordmark{width:196px;aspect-ratio:1493/185}
+        .d .logo-home .logo-ring{width:34px;aspect-ratio:1;display:none}
 
         /* Narrative v0.2 / 02 FROM DATA — observation becomes field conviction. */
         .d .from-data-section{
@@ -544,7 +549,8 @@
         .d .motion-ready.motion-active .motion-node{opacity:1!important;transform:scale(1)}
         @media(max-width:900px){
           .d .site-head{padding:0 12px!important;display:grid!important;grid-template-columns:auto 58px minmax(116px,1fr)}
-          .d .logo-home{font-size:15px}
+          .d .logo-home{width:140px;min-width:140px;height:48px}
+          .d .logo-home .logo-wordmark{width:140px}
           .d .locale-control{width:58px;min-width:0;justify-self:stretch}
           .d .locale-switch{min-width:0;padding:0 6px;gap:5px}
           .d .locale-menu{right:0;width:min(216px,calc(100vw - 40px))}
@@ -684,6 +690,12 @@
           .d .evidence-layer small{font-size:7px}
           .d .evidence-depth-guide{left:11%;top:calc(12% + 41px);height:calc(59% + 12px);width:7%}
         }
+        @media(max-width:379px){
+          .d .site-head{grid-template-columns:58px 58px minmax(116px,1fr)}
+          .d .logo-home{width:58px;min-width:58px}
+          .d .logo-home .logo-wordmark{display:none}
+          .d .logo-home .logo-ring{display:block}
+        }
         @media(prefers-reduced-motion:reduce){
           .d #the-platform.motion-ready [data-motion],
           .d .from-data-section.motion-ready [data-motion],
@@ -700,7 +712,6 @@
         }
       `;
       doc.head.appendChild(refinement);
-      panel.querySelector('.logo').innerHTML='<span class="own">OWN</span><span class="ground">GROUND</span>';
       panel.querySelector('.hero-brand').textContent='OWNGROUND';
       const fromData=doc.createElement('section');
       fromData.id='from-data';
@@ -748,12 +759,11 @@
 
       const mainNav=panel.querySelector('.site-head nav');
       const legacyLogo=panel.querySelector('.site-head .logo');
-      const logoHome=doc.createElement('a');
-      logoHome.className=`${legacyLogo.className} logo-home`;
+      const logoHome=legacyLogo.matches('a')?legacyLogo:doc.createElement('a');
+      if(logoHome!==legacyLogo){logoHome.className=legacyLogo.className;logoHome.innerHTML=legacyLogo.innerHTML;legacyLogo.replaceWith(logoHome)}
+      logoHome.classList.add('logo-home');
       logoHome.href='#brand-core';
       logoHome.setAttribute('aria-label','OWNGROUND — 01 Hero');
-      logoHome.innerHTML=legacyLogo.innerHTML;
-      legacyLogo.replaceWith(logoHome);
       mainNav.innerHTML=`<a href="#brand-core">01 / HERO</a><a href="#from-data">02 / FROM DATA</a><a href="#field-leads">03 / FIELD LEADS</a><a href="#the-gap">04 / THE GAP</a><a href="#the-platform">05 / THE PLATFORM</a><a href="#ecosystem">06 / ECOSYSTEM</a>`;
       const mainNavLinks=[...mainNav.querySelectorAll('a')];
       const positionNav=panel.querySelector('.position-nav');
