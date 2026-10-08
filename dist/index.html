@@ -351,6 +351,12 @@
           border-left:1px solid var(--line);
         }
         .d .header-contact:hover,.d .header-contact:focus-visible{color:var(--paper);background:var(--green);outline:0}
+        .d .header-download{
+          min-width:92px;padding:0 14px;display:flex;align-self:stretch;align-items:center;justify-content:center;
+          color:var(--green);text-decoration:none;border-left:1px solid var(--line);
+          font:700 9px "OWNGROUND IBM Plex Mono",monospace;letter-spacing:.09em;
+        }
+        .d .header-download:hover,.d .header-download:focus-visible{color:var(--paper);background:var(--green);outline:0}
         .d.locale-latin .hero-title,
         .d.locale-latin .from-data-title,
         .d.locale-latin .from-data-body,
@@ -548,9 +554,10 @@
         }
         .d .motion-ready.motion-active .motion-node{opacity:1!important;transform:scale(1)}
         @media(max-width:900px){
-          .d .site-head{padding:0 12px!important;display:grid!important;grid-template-columns:auto 58px minmax(116px,1fr)}
-          .d .logo-home{width:140px;min-width:140px;height:48px}
-          .d .logo-home .logo-wordmark{width:140px}
+          .d .site-head{padding:0 12px!important;display:grid!important;grid-template-columns:112px 54px 48px minmax(110px,1fr)}
+          .d .logo-home{width:112px;min-width:112px;height:48px}
+          .d .logo-home .logo-wordmark{width:112px}
+          .d .header-download{min-width:0;padding:0 5px;font-size:7.5px}
           .d .locale-control{width:58px;min-width:0;justify-self:stretch}
           .d .locale-switch{min-width:0;padding:0 6px;gap:5px}
           .d .locale-menu{right:0;width:min(216px,calc(100vw - 40px))}
@@ -765,6 +772,12 @@
       logoHome.href='#brand-core';
       logoHome.setAttribute('aria-label','OWNGROUND — 01 Hero');
       mainNav.innerHTML=`<a href="#brand-core">01 / HERO</a><a href="#from-data">02 / FROM DATA</a><a href="#field-leads">03 / FIELD LEADS</a><a href="#the-gap">04 / THE GAP</a><a href="#the-platform">05 / THE PLATFORM</a><a href="#ecosystem">06 / ECOSYSTEM</a>`;
+      const downloadLink=doc.createElement('a');
+      downloadLink.className='header-download';
+      downloadLink.href='./download/';
+      downloadLink.target='_top';
+      downloadLink.textContent='DOWNLOAD';
+      mainNav.after(downloadLink);
       const mainNavLinks=[...mainNav.querySelectorAll('a')];
       const positionNav=panel.querySelector('.position-nav');
       positionNav.innerHTML=`<a href="#brand-core" aria-current="true" aria-label="01 Hero"><span>01 / HERO</span></a><a href="#from-data" aria-current="false" aria-label="02 From Data"><span>02 / FROM DATA</span></a><a href="#field-leads" aria-current="false" aria-label="03 Field Leads"><span>03 / FIELD LEADS</span></a><a href="#the-gap" aria-current="false" aria-label="04 The Gap"><span>04 / THE GAP</span></a><a href="#the-platform" aria-current="false" aria-label="05 The Platform"><span>05 / THE PLATFORM</span></a><a href="#ecosystem" aria-current="false" aria-label="06 Ecosystem"><span>06 / ECOSYSTEM</span></a>`;
@@ -895,6 +908,7 @@
         activeLocale=localeApi.apply(doc,panel,locale);
         document.documentElement.lang=activeLocale;
         preview.title=`OWNGROUND — ${localeApi.registry[activeLocale].name}`;
+        downloadLink.href=activeLocale===localeApi.contract.canonical?'./download/':`./download/?lang=${activeLocale}`;
         const url=new URL(window.location.href);
         url.searchParams.delete('v');
         if(activeLocale===localeApi.contract.canonical)url.searchParams.delete('lang');
