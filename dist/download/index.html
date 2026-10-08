@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>OWNGROUND Download</title>
+  <meta name="description" content="OWNGROUND 소프트웨어 공식 다운로드 페이지입니다.">
+  <meta name="theme-color" content="#111915">
+  <link rel="canonical" href="https://ownground.kr/download/">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="icon" href="../favicon.ico" sizes="any">
+  <style>
+    @font-face{font-family:Suit;src:url('../fonts/brand/SUIT-Variable.woff2') format('woff2');font-display:swap}
+    @font-face{font-family:Wanted;src:url('../fonts/brand/WantedSansVariable.woff2') format('woff2');font-display:swap}
+    @font-face{font-family:Plex;src:url('../fonts/brand/IBMPlexMono-Regular.woff2') format('woff2');font-display:swap}
+    :root{--paper:#f7f8f5;--ink:#202722;--muted:#68746d;--line:#cfd6d1;--green:#28724f;--soft:#edf1ed}
+    *{box-sizing:border-box}html{background:var(--paper);color:var(--ink);font-family:Wanted,Arial,sans-serif}body{margin:0}a{color:inherit}
+    .head{height:86px;padding:0 3.5vw;display:flex;align-items:center;border-bottom:1px solid var(--line)}
+    .brand{width:196px;display:block}.brand img{width:100%;display:block}.utility{margin-left:auto;display:flex;align-self:stretch}
+    .utility a,.utility button,.lang{min-width:92px;padding:0 18px;display:flex;align-items:center;justify-content:center;border:0;border-left:1px solid var(--line);background:none;color:var(--green);font:700 10px Plex,monospace;letter-spacing:.09em;text-decoration:none;cursor:pointer}
+    .utility a:hover,.utility a:focus-visible,.utility button:hover,.utility button:focus-visible,.lang:hover,.lang:focus-visible{background:var(--green);color:var(--paper);outline:0}
+    main{min-height:calc(100vh - 86px);padding:44px 3.5vw 54px}.kicker,.trust,.channel-tag,.meta dt,.foot{font-family:Plex,monospace;letter-spacing:.11em;text-transform:uppercase}
+    .kicker{display:flex;justify-content:space-between;padding-bottom:20px;color:var(--green);font-size:10px;border-bottom:1px solid var(--line)}
+    .intro{min-height:330px;padding:64px 0;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(320px,.75fr);align-items:end;gap:7vw}
+    h1{margin:0;font:560 clamp(58px,6.8vw,104px)/.9 Suit,sans-serif;letter-spacing:-.065em}h1 span{display:block;color:var(--green)}
+    .intro p{margin:0 0 8px;padding:26px 0 0;border-top:1px solid var(--line);font-size:20px;line-height:1.65;word-break:keep-all}
+    .releases{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+    .release{min-width:0;padding:34px 3vw 38px}.release+.release{border-left:1px solid var(--ink)}
+    .channel-head{min-height:112px;display:flex;align-items:flex-start;justify-content:space-between;gap:20px;border-bottom:1px solid var(--line)}
+    .channel-tag{margin:0 0 11px;color:var(--green);font-size:10px}.channel-head h2{margin:0;font:560 42px/1 Inter,Arial,sans-serif;letter-spacing:-.045em}.role{max-width:270px;margin:16px 0 0;color:var(--muted);line-height:1.6}
+    .recommended{padding:6px 8px;color:var(--green);border:1px solid var(--green);font:700 9px Plex,monospace;letter-spacing:.09em}
+    .product{padding:30px 0 22px;font:600 22px Suit,sans-serif}.meta{margin:0;display:grid;grid-template-columns:145px minmax(0,1fr);border-top:1px solid var(--line)}
+    .meta div{display:contents}.meta dt,.meta dd{margin:0;padding:13px 0;border-bottom:1px solid var(--line)}.meta dt{color:var(--muted);font-size:9px}.meta dd{font-size:14px;overflow-wrap:anywhere}
+    .hash{font-family:Plex,monospace;font-size:11px!important;line-height:1.55}.hash-row{display:flex;gap:10px;align-items:flex-start}.copy{flex:0 0 auto;padding:4px 7px;border:1px solid var(--line);background:none;color:var(--muted);font:700 9px Plex,monospace;cursor:pointer}.copy:disabled{opacity:.45;cursor:not-allowed}.copy:not(:disabled):hover,.copy:not(:disabled):focus-visible{border-color:var(--green);color:var(--green);outline:0}
+    .actions{padding-top:28px;display:grid;gap:12px}.download{min-height:52px;display:flex;align-items:center;justify-content:center;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font:700 11px Plex,monospace;letter-spacing:.1em;text-decoration:none}.download[aria-disabled="true"]{background:var(--soft);border-color:var(--line);color:var(--muted);cursor:not-allowed}.notes{font:700 10px Plex,monospace;color:var(--green)}.notes[hidden]{display:none}
+    .trust{margin:18px 0 0;color:var(--muted);font-size:9px}.status{min-height:44px;margin:0;padding:12px 3.5vw;color:var(--muted);background:var(--soft);font-size:13px}.status.error{color:#7b2f2f}
+    .foot{padding:28px 3.5vw 34px;display:flex;justify-content:space-between;color:var(--muted);font-size:9px}.previous[aria-disabled="true"]{opacity:.55;text-decoration:none;pointer-events:none}
+    @media(max-width:760px){.head{height:72px;padding:0 20px}.brand{width:140px}.utility a,.utility button,.lang{min-width:58px;padding:0 8px;font-size:9px}.utility a:first-of-type{display:none}main{padding:30px 22px 42px}.kicker{gap:18px}.intro{min-height:0;padding:58px 0;display:block}.intro p{margin-top:52px;font-size:18px}.releases{display:block}.release{padding:30px 0 36px}.release+.release{border-left:0;border-top:1px solid var(--ink)}.channel-head{min-height:106px}.meta{grid-template-columns:118px minmax(0,1fr)}.foot{padding:24px 22px 30px;gap:24px;line-height:1.5}h1{font-size:clamp(46px,13vw,58px)}}
+  </style>
+</head>
+<body>
+  <header class="head"><a class="brand home-link" href="../" aria-label="OWNGROUND Home"><img src="../assets/brand/ownground-wordmark-light.svg" alt="OWNGROUND"></a><nav class="utility" aria-label="Utility navigation"><button class="back" type="button" aria-label="이전 페이지로 돌아가기">BACK</button><a class="home-link" href="../">HOME</a><select class="lang" aria-label="Language"><option value="ko">KO</option><option value="en">EN</option><option value="ja">JA</option><option value="es">ES</option><option value="vi">VI</option><option value="id">ID</option><option value="th">TH</option></select></nav></header>
+  <main>
+    <div class="kicker"><span>DOWNLOAD / SOFTWARE</span><span>OFFICIAL DISTRIBUTION</span></div>
+    <section class="intro"><h1>OWNGROUND<span>DOWNLOAD</span></h1><p data-i18n="intro">현장에서 사용할 수 있는<br>OWNGROUND 소프트웨어를 다운로드합니다.</p></section>
+    <section class="releases" aria-label="Release channels">
+      <article class="release" data-channel="lts"><header class="channel-head"><div><p class="channel-tag">LTS / LONG-TERM SUPPORT</p><h2>LTS</h2><p class="role" data-i18n="ltsRole">운영 환경에서 권장하는 안정 버전</p></div><span class="recommended" data-i18n="recommended">RECOMMENDED</span></header><div class="release-body"></div></article>
+      <article class="release" data-channel="latest"><header class="channel-head"><div><p class="channel-tag">LATEST / CURRENT RELEASE</p><h2>LATEST</h2><p class="role" data-i18n="latestRole">최신 기능이 포함된 최신 정식 버전</p></div></header><div class="release-body"></div></article>
+    </section>
+  </main>
+  <p class="status" role="status" data-i18n="loading">Release metadata loading…</p>
+  <footer class="foot"><a class="previous" aria-disabled="true" data-i18n="previous">PREVIOUS RELEASES</a><span>VERIFY BEFORE INSTALLATION</span></footer>
+  <script>
+    const locales=['ko','en','ja','es','vi','id','th'];
+    const copy={
+      ko:{intro:'현장에서 사용할 수 있는<br>OWNGROUND 소프트웨어를 다운로드합니다.',ltsRole:'운영 환경에서 권장하는 안정 버전',latestRole:'최신 기능이 포함된 최신 정식 버전',recommended:'RECOMMENDED',previous:'PREVIOUS RELEASES',loading:'Release metadata loading…',pending:'Release metadata pending',download:'DOWNLOAD INSTALLER',notes:'RELEASE NOTES',copy:'COPY',copied:'COPIED',error:'Release 정보를 불러오지 못했습니다. 잘못된 다운로드 링크는 제공하지 않습니다.'},
+      en:{intro:'Download OWNGROUND software<br>for use in the field.',ltsRole:'Stable release recommended for operational environments',latestRole:'Current release with the latest production features',recommended:'RECOMMENDED',previous:'PREVIOUS RELEASES',loading:'Release metadata loading…',pending:'Release metadata pending',download:'DOWNLOAD INSTALLER',notes:'RELEASE NOTES',copy:'COPY',copied:'COPIED',error:'Release information is unavailable. No unverified download link is shown.'},
+      ja:{intro:'現場で使用できる<br>OWNGROUNDソフトウェアをダウンロードします。',ltsRole:'運用環境に推奨する安定版',latestRole:'最新機能を含む正式版',recommended:'推奨',previous:'過去のリリース',loading:'リリース情報を読み込んでいます…',pending:'リリース情報準備中',download:'インストーラーをダウンロード',notes:'リリースノート',copy:'コピー',copied:'コピー済み',error:'リリース情報を取得できません。未検証のリンクは表示しません。'},
+      es:{intro:'Descarga el software OWNGROUND<br>para utilizarlo en operaciones.',ltsRole:'Versión estable recomendada para entornos operativos',latestRole:'Versión oficial con las funciones más recientes',recommended:'RECOMENDADO',previous:'VERSIONES ANTERIORES',loading:'Cargando información de la versión…',pending:'Metadatos de versión pendientes',download:'DESCARGAR INSTALADOR',notes:'NOTAS DE VERSIÓN',copy:'COPIAR',copied:'COPIADO',error:'La información no está disponible. No se muestran enlaces sin verificar.'},
+      vi:{intro:'Tải phần mềm OWNGROUND<br>để sử dụng tại hiện trường.',ltsRole:'Bản ổn định được khuyến nghị cho môi trường vận hành',latestRole:'Bản chính thức có các tính năng mới nhất',recommended:'KHUYÊN DÙNG',previous:'BẢN PHÁT HÀNH TRƯỚC',loading:'Đang tải thông tin phát hành…',pending:'Đang chờ dữ liệu phát hành',download:'TẢI BỘ CÀI ĐẶT',notes:'GHI CHÚ PHÁT HÀNH',copy:'SAO CHÉP',copied:'ĐÃ SAO CHÉP',error:'Không thể tải thông tin phát hành. Không hiển thị liên kết chưa xác minh.'},
+      id:{intro:'Unduh perangkat lunak OWNGROUND<br>untuk digunakan di lapangan.',ltsRole:'Rilis stabil yang direkomendasikan untuk lingkungan operasional',latestRole:'Rilis resmi dengan fitur terbaru',recommended:'DIREKOMENDASIKAN',previous:'RILIS SEBELUMNYA',loading:'Memuat informasi rilis…',pending:'Metadata rilis belum tersedia',download:'UNDUH PENGINSTAL',notes:'CATATAN RILIS',copy:'SALIN',copied:'TERSALIN',error:'Informasi rilis tidak tersedia. Tautan yang belum diverifikasi tidak ditampilkan.'},
+      th:{intro:'ดาวน์โหลดซอฟต์แวร์ OWNGROUND<br>สำหรับใช้งานในหน้างาน',ltsRole:'รุ่นเสถียรที่แนะนำสำหรับสภาพแวดล้อมการปฏิบัติงาน',latestRole:'รุ่นทางการที่มีฟีเจอร์ล่าสุด',recommended:'แนะนำ',previous:'รุ่นก่อนหน้า',loading:'กำลังโหลดข้อมูลรุ่น…',pending:'รอข้อมูลรุ่น',download:'ดาวน์โหลดตัวติดตั้ง',notes:'บันทึกประจำรุ่น',copy:'คัดลอก',copied:'คัดลอกแล้ว',error:'ไม่สามารถโหลดข้อมูลรุ่นได้ และจะไม่แสดงลิงก์ที่ยังไม่ผ่านการตรวจสอบ'}
+    };
+    const params=new URLSearchParams(location.search);let locale=locales.includes(params.get('lang'))?params.get('lang'):'ko';
+    const t=key=>copy[locale]?.[key]??copy.ko[key];
+    const langSelect=document.querySelector('.lang');
+    document.querySelector('.back').addEventListener('click',()=>{document.referrer&&new URL(document.referrer).origin===location.origin?history.back():location.assign(document.querySelector('.home-link').href)});
+    const applyLocale=()=>{document.documentElement.lang=locale;langSelect.value=locale;document.querySelectorAll('[data-i18n]').forEach(el=>el.innerHTML=t(el.dataset.i18n));document.querySelectorAll('.home-link').forEach(link=>link.href=locale==='ko'?'../':`../?lang=${locale}`);};
+    langSelect.addEventListener('change',()=>{locale=langSelect.value;const url=new URL(location.href);locale==='ko'?url.searchParams.delete('lang'):url.searchParams.set('lang',locale);history.replaceState(null,'',url);applyLocale();render();});
+    let manifest;
+    const value=(release,key)=>release[key]??t('pending');
+    const render=()=>{
+      if(!manifest)return;
+      const product=manifest.products[0];
+      for(const channel of ['lts','latest']){
+        const release=product.releases[channel];const ready=release.status==='ready'&&release.downloadUrl&&release.sha256;
+        document.querySelector(`[data-channel="${channel}"] .release-body`).innerHTML=`<div class="product">${product.name}</div><dl class="meta"><div><dt>VERSION</dt><dd>${value(release,'version')}</dd></div><div><dt>RELEASE DATE</dt><dd>${value(release,'releasedAt')}</dd></div><div><dt>OS</dt><dd>${value(release,'platform')}</dd></div><div><dt>ARCHITECTURE</dt><dd>${value(release,'arch')}</dd></div><div><dt>FILE SIZE</dt><dd>${value(release,'fileSize')}</dd></div><div><dt>SHA-256</dt><dd class="hash"><span class="hash-row"><span>${value(release,'sha256')}</span><button class="copy" type="button" ${release.sha256?'':'disabled'} data-hash="${release.sha256??''}">${t('copy')}</button></span></dd></div><div><dt>DIGITAL SIGNATURE</dt><dd>${release.signed===true?'SIGNED':release.signed===false?'NOT SIGNED':t('pending')}</dd></div></dl><div class="actions"><a class="download" ${ready?`href="${release.downloadUrl}"`:'aria-disabled="true"'}>${t('download')}</a><a class="notes" ${release.releaseNotesUrl?`href="${release.releaseNotesUrl}"`:'hidden'}>${t('notes')}</a></div><p class="trust">${ready?'OFFICIAL GITHUB RELEASE':'RELEASE METADATA PENDING'} · VERIFY BEFORE INSTALLATION</p>`;
+      }
+      const previous=document.querySelector('.previous');if(product.previousReleasesUrl){previous.href=product.previousReleasesUrl;previous.removeAttribute('aria-disabled')}
+      document.querySelector('.status').textContent=t('pending');
+    };
+    document.addEventListener('click',async event=>{const button=event.target.closest('.copy:not(:disabled)');if(!button)return;await navigator.clipboard.writeText(button.dataset.hash);button.textContent=t('copied');setTimeout(()=>button.textContent=t('copy'),1200)});
+    applyLocale();
+    fetch('../releases/download-manifest.json').then(response=>{if(!response.ok)throw new Error();return response.json()}).then(data=>{if(data.schemaVersion!==1||!Array.isArray(data.products)||!data.products[0]?.releases?.lts||!data.products[0]?.releases?.latest)throw new Error();manifest=data;render()}).catch(()=>{const status=document.querySelector('.status');status.textContent=t('error');status.classList.add('error');document.querySelectorAll('.release-body').forEach(body=>body.innerHTML=`<p class="product">${t('error')}</p>`)});
+  </script>
+</body>
+</html>
