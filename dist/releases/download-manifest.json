@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "products": [
+    {
+      "id": "studio",
+      "name": "OWNGROUND Studio",
+      "previousReleasesUrl": null,
+      "releases": {
+        "lts": {
+          "status": "ready",
+          "version": "0.1.0-validation",
+          "releasedAt": "2026-10-08",
+          "platform": "Windows 10/11",
+          "arch": "x64",
+          "fileSize": "228.72 MB",
+          "sha256": "8DA95B14C9FF963A2117DD89F5E197EF3C72298DD09AE89549BCB626D810631E",
+          "signed": false,
+          "downloadUrl": "https://github.com/OWNGROUND/ownground-releases/releases/download/studio-v0.1.0-validation/OWNGROUND_Studio_Installer.exe",
+          "releaseNotesUrl": "https://github.com/OWNGROUND/ownground-releases/releases/tag/studio-v0.1.0-validation"
+        },
+        "latest": {
+          "status": "pending",
+          "version": null,
+          "releasedAt": null,
+          "platform": "Windows 10/11",
+          "arch": "x64",
+          "fileSize": null,
+          "sha256": null,
+          "signed": null,
+          "downloadUrl": null,
+          "releaseNotesUrl": null
+        }
+      }
+    }
+  ]
+}
