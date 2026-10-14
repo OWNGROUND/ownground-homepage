@@ -42,6 +42,19 @@
         .d .logo-home img{display:block;height:auto;object-fit:contain}
         .d .logo-home .logo-wordmark{width:196px;aspect-ratio:1493/185}
         .d .logo-home .logo-ring{width:34px;aspect-ratio:1;display:none}
+        .d .platform-download{
+          width:max-content;margin-top:12px;padding:7px 0 3px;
+          color:var(--green);border-bottom:1px solid var(--green);
+          font:700 8px "OWNGROUND IBM Plex Mono",monospace;letter-spacing:.12em;text-decoration:none
+        }
+        .d .platform-download:hover,.d .platform-download:focus-visible{color:var(--ink);border-color:var(--ink);outline:0}
+        .d .product-studio .platform-download{align-self:flex-end}
+        .d .home-utility-footer{
+          min-height:92px;padding:0 3.5vw;display:flex;align-items:center;justify-content:flex-end;gap:34px;
+          border-top:1px solid var(--line);background:var(--paper)
+        }
+        .d .home-utility-footer a{color:var(--green);font:700 9px "OWNGROUND IBM Plex Mono",monospace;letter-spacing:.12em;text-decoration:none}
+        .d .home-utility-footer a:hover,.d .home-utility-footer a:focus-visible{color:var(--ink);outline:0}
 
         /* Narrative v0.2 / 02 FROM DATA — observation becomes field conviction. */
         .d .from-data-section{
@@ -733,6 +746,9 @@
           .d .logo-home{width:min(132px,100%)}
           .d .header-menu-panel{width:100vw}
           .d .position-nav{display:none!important}
+          .d #the-platform .platform-download{display:inline-block;margin-top:10px;font-size:7px}
+          .d #the-platform .product-studio .platform-download{align-self:flex-start}
+          .d .home-utility-footer{min-height:84px;padding:0 22px;justify-content:space-between}
         }
         @media(prefers-reduced-motion:reduce){
           .d #the-platform.motion-ready [data-motion],
@@ -807,7 +823,7 @@
       downloadLink.className='header-download';
       downloadLink.href='./download/';
       downloadLink.target='_top';
-      downloadLink.textContent='DOWNLOAD';
+      downloadLink.textContent='DOWNLOADS';
       mainNav.after(downloadLink);
       const headerMenuToggle=doc.createElement('button');
       headerMenuToggle.className='header-menu-toggle';
@@ -821,7 +837,7 @@
       headerMenuPanel.setAttribute('role','navigation');
       headerMenuPanel.setAttribute('aria-label','Compact navigation');
       headerMenuPanel.hidden=true;
-      headerMenuPanel.innerHTML=`${mainNav.innerHTML}<a class="menu-utility menu-download" href="./download/" target="_top">DOWNLOAD</a><a class="menu-utility" href="mailto:contact@ownground.kr">CONTACT</a>`;
+      headerMenuPanel.innerHTML=`${mainNav.innerHTML}<a class="menu-utility menu-download" href="./download/" target="_top">DOWNLOADS</a><a class="menu-utility" href="mailto:contact@ownground.kr">CONTACT</a>`;
       downloadLink.after(headerMenuToggle,headerMenuPanel);
       const mainNavLinks=[...mainNav.querySelectorAll('a'),...headerMenuPanel.querySelectorAll('a[href^="#"]')];
       const menuDownloadLink=headerMenuPanel.querySelector('.menu-download');
@@ -911,6 +927,11 @@
         <circle class="platform-mobile-anchor" cx="312" cy="352" r="5"/>
       `;
       panel.querySelector('.platform-map').appendChild(mobileConnections);
+      const platformOperations=panel.querySelector('.product-operations');
+      const platformStudio=panel.querySelector('.product-studio');
+      platformOperations.insertAdjacentHTML('beforeend','<a class="platform-download download-utility-link" href="./download/#ogoperation" target="_top">OGoperation / DOWNLOAD</a>');
+      platformStudio.insertAdjacentHTML('beforeend','<a class="platform-download download-utility-link" href="./download/#studio" target="_top">DOWNLOAD</a>');
+      panel.querySelector('.platform-map').setAttribute('role','group');
       const ecosystem=doc.createElement('section');
       ecosystem.id='ecosystem';
       ecosystem.className='ecosystem-section';
@@ -926,6 +947,10 @@
         </div>
       `;
       panel.querySelector('#the-platform').after(ecosystem);
+      const utilityFooter=doc.createElement('footer');
+      utilityFooter.className='home-utility-footer';
+      utilityFooter.innerHTML='<a class="download-utility-link" href="./download/" target="_top">DOWNLOADS</a><a href="mailto:contact@ownground.kr">CONTACT</a>';
+      ecosystem.after(utilityFooter);
       panel.querySelectorAll('[aria-label]').forEach(element=>element.setAttribute('aria-label',element.getAttribute('aria-label').replaceAll('OWNGROUND','OWNGROUND')));
       const localeApi=window.OWNGROUND_I18N;
       const localeParam=new URLSearchParams(window.location.search).get('lang');
@@ -956,6 +981,10 @@
         preview.title=`OWNGROUND — ${localeApi.registry[activeLocale].name}`;
         downloadLink.href=activeLocale===localeApi.contract.canonical?'./download/':`./download/?lang=${activeLocale}`;
         menuDownloadLink.href=downloadLink.href;
+        panel.querySelectorAll('.download-utility-link').forEach(link=>{
+          const hash=link.hash;
+          link.href=`${activeLocale===localeApi.contract.canonical?'./download/':`./download/?lang=${activeLocale}`}${hash}`;
+        });
         const url=new URL(window.location.href);
         url.searchParams.delete('v');
         if(activeLocale===localeApi.contract.canonical)url.searchParams.delete('lang');
