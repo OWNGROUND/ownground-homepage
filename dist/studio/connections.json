@@ -1,13 +1,13 @@
 {
   "envelopeVersion": 1,
   "payloadEncoding": "base64url",
-  "payloadSha256": "a1a2dfa73daf5d03fd057c31e6e10a91d6a866f350adf695e5df247d26a0fde2",
-  "payload": "eyJzY2hlbWFWZXJzaW9uIjoxLCJyZWdpc3RyeVZlcnNpb24iOjMsImlzc3VlZEF0IjoiMjAyNi0xMC0xNlQwMjo0ODowNVoiLCJleHBpcmVzQXQiOiIyMDI2LTExLTE1VDAyOjQ4OjA1WiIsImNvbm5lY3Rpb25zIjpbeyJpZCI6Im15ZW9uZ2ppbi1wcm9kdWN0aW9uIiwiZGlzcGxheU5hbWUiOiLrqoXsp4Tri4jtjIUiLCJvcmlnaW4iOiJodHRwczovL215ZW9uZ2ppbi5vd25ncm91bmQua3IvIiwib3JnYW5pemF0aW9uQ29kZSI6Ik1ZRU9OR0pJTiIsImVudmlyb25tZW50IjoicHJvZHVjdGlvbiIsImluc3RhbmNlSWQiOiI2MjJjYWVlYS02YWY5LTQyYjUtOTQ2Yi1kOTUzYmZkODRjYzAiLCJlbmFibGVkIjp0cnVlfV19Cg",
+  "payloadSha256": "6857b10d6ab9cbad2594933fccdbac533ba3ee3446910021f1574fe7e0e6ec4a",
+  "payload": "eyJzY2hlbWFWZXJzaW9uIjoxLCJyZWdpc3RyeVZlcnNpb24iOjQsImlzc3VlZEF0IjoiMjAyNi0xMC0xNlQxNToxMDowNi45NDNaIiwiZXhwaXJlc0F0IjoiMjAyNi0xMS0xNVQxNToxMDowNi45NDNaIiwiY29ubmVjdGlvbnMiOlt7ImlkIjoibXllb25namluLXByb2R1Y3Rpb24iLCJkaXNwbGF5TmFtZSI6IuuqheynhOuLiO2MhSIsIm9yaWdpbiI6Imh0dHBzOi8vbXllb25namluLm93bmdyb3VuZC5rci8iLCJvcmdhbml6YXRpb25Db2RlIjoiTVlFT05HSklOIiwiZW52aXJvbm1lbnQiOiJwcm9kdWN0aW9uIiwiaW5zdGFuY2VJZCI6IjYyMmNhZWVhLTZhZjktNDJiNS05NDZiLWQ5NTNiZmQ4NGNjMCIsImVuYWJsZWQiOnRydWV9XX0",
   "signatures": [
     {
-      "keyId": "og-studio-registry-2026-10",
+      "keyId": "og-studio-registry-gcp-v1",
       "algorithm": "Ed25519",
-      "signature": "nzTVKa74W9lLLzMPU69pXqcPG-ZxWSwzRR1LK3VPSGRZopfhLvfMiV2DmlnTpLcN7PpRYhz4I6RdFeelBBKxBg"
+      "signature": "Cyibx31rCeG4WrqqGdcFS306X__9bZeK1HxR8FCRn2mCvjyR_5FAQvwRRusDlnZVepUTlslAEI_Qqm8wRkjUCg"
     }
   ]
 }
