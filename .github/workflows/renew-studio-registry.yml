@@ -1,0 +1,83 @@
+name: Renew Studio Connection Registry
+
+on:
+  schedule:
+    - cron: '17 2 * * *'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Renew even when more than 14 days remain
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  id-token: write
+  pages: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  renew:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Prepare renewal
+        id: prepare
+        run: >-
+          node scripts/renew-studio-registry.mjs prepare
+          registry=dist/studio/connections.json
+          payload=${{ runner.temp }}/registry-payload.json
+          message=${{ runner.temp }}/registry-message.bin
+          force=${{ github.event_name == 'workflow_dispatch' && inputs.force || false }}
+
+      - name: Authenticate to Google Cloud
+        if: steps.prepare.outputs.changed == 'true'
+        uses: google-github-actions/auth@v3
+        with:
+          project_id: ownground-security-prod
+          workload_identity_provider: projects/270652783722/locations/global/workloadIdentityPools/github-actions/providers/github-ownground
+
+      - name: Set up Google Cloud CLI
+        if: steps.prepare.outputs.changed == 'true'
+        uses: google-github-actions/setup-gcloud@v3
+
+      - name: Sign and verify Registry
+        if: steps.prepare.outputs.changed == 'true'
+        run: |
+          gcloud kms keys versions get-public-key 1 --key=registry-signing --keyring=studio-registry --location=global --project=ownground-security-prod --output-file=${{ runner.temp }}/registry-public.pem
+          gcloud kms asymmetric-sign --version=1 --key=registry-signing --keyring=studio-registry --location=global --project=ownground-security-prod --input-file=${{ runner.temp }}/registry-message.bin --signature-file=${{ runner.temp }}/registry-signature.bin
+          node scripts/renew-studio-registry.mjs finalize registry=dist/studio/connections.json payload=${{ runner.temp }}/registry-payload.json signature=${{ runner.temp }}/registry-signature.bin publicKey=${{ runner.temp }}/registry-public.pem
+
+      - name: Commit Registry
+        if: steps.prepare.outputs.changed == 'true'
+        run: |
+          git config user.name 'OWNGROUND Registry Bot'
+          git config user.email 'registry-bot@users.noreply.github.com'
+          git add -- dist/studio/connections.json
+          git diff --cached --check
+          git commit -m 'chore(homepage): renew Studio connection registry'
+          git push origin HEAD:main
+
+      - name: Configure Pages
+        if: steps.prepare.outputs.changed == 'true'
+        uses: actions/configure-pages@v5
+
+      - name: Upload public site
+        if: steps.prepare.outputs.changed == 'true'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+      - name: Deploy
+        if: steps.prepare.outputs.changed == 'true'
+        id: deployment
+        uses: actions/deploy-pages@v4
