@@ -1,8 +1,13 @@
 {
   "envelopeVersion": 1,
-  "keyId": "og-studio-registry-2026-10",
-  "algorithm": "Ed25519",
-  "payload": "eyJzY2hlbWFWZXJzaW9uIjoxLCJyZWdpc3RyeVZlcnNpb24iOjEsImlzc3VlZEF0IjoiMjAyNi0xMC0xNlQwMjozNjoyMFoiLCJleHBpcmVzQXQiOiIyMDI2LTEwLTIzVDAyOjM2OjIwWiIsImNvbm5lY3Rpb25zIjpbeyJpZCI6Im15ZW9uZ2ppbi1wcm9kdWN0aW9uIiwiZGlzcGxheU5hbWUiOiLrqoXsp4Tri4jtjIUiLCJvcmlnaW4iOiJodHRwczovL215ZW9uZ2ppbi5vd25ncm91bmQua3IvIiwib3JnYW5pemF0aW9uQ29kZSI6Ik1ZRU9OR0pJTiIsImVudmlyb25tZW50IjoicHJvZHVjdGlvbiIsImluc3RhbmNlSWQiOiI2MjJjYWVlYS02YWY5LTQyYjUtOTQ2Yi1kOTUzYmZkODRjYzAiLCJlbmFibGVkIjp0cnVlfV19Cg",
-  "payloadSha256": "25dd99edd9b8c286114a251961531e4f64550b1fbd5f796f789a8b27193e9ce1",
-  "signature": "gUnhBB4bZKSq6STGjgEPFckDuUOHWEwFmavHUbsjJWZIRt1sl7kWBifX5XD0thBxT8pz6kUR8ag6ADy6p7dLAg"
+  "payloadEncoding": "base64url",
+  "payloadSha256": "b1e4b5b814122509e077bf06603f98a9aa30b5ccd2ec2170930aa6d8229f24f9",
+  "payload": "eyJzY2hlbWFWZXJzaW9uIjoxLCJyZWdpc3RyeVZlcnNpb24iOjIsImlzc3VlZEF0IjoiMjAyNi0xMC0xNlQwMjo0MTowMVoiLCJleHBpcmVzQXQiOiIyMDI2LTEwLTIzVDAyOjQxOjAxWiIsImNvbm5lY3Rpb25zIjpbeyJpZCI6Im15ZW9uZ2ppbi1wcm9kdWN0aW9uIiwiZGlzcGxheU5hbWUiOiLrqoXsp4Tri4jtjIUiLCJvcmlnaW4iOiJodHRwczovL215ZW9uZ2ppbi5vd25ncm91bmQua3IvIiwib3JnYW5pemF0aW9uQ29kZSI6Ik1ZRU9OR0pJTiIsImVudmlyb25tZW50IjoicHJvZHVjdGlvbiIsImluc3RhbmNlSWQiOiI2MjJjYWVlYS02YWY5LTQyYjUtOTQ2Yi1kOTUzYmZkODRjYzAiLCJlbmFibGVkIjp0cnVlfV19Cg",
+  "signatures": [
+    {
+      "keyId": "og-studio-registry-2026-10",
+      "algorithm": "Ed25519",
+      "signature": "gitaAkRfhLmOF1PfJKzH-AGhTM3zJbFDY_g9t5KKlwH2IwLgrWQWW5mrl8F6vreK_DudiLmpa8jjL0UxDSIqCQ"
+    }
+  ]
 }
