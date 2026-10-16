@@ -7,6 +7,10 @@ const TRUSTED_KEYS=new Map([
  ['og-studio-registry-2026-10','X7qAwTTwc16B4-0plpV-FPAUZX19oOgKxl_k65pRSP8'],
  ['og-studio-registry-gcp-v1','8m_WPKYJEsHZAfCp8XiUTRu4k5PBSOtsMLf3Np7DKXo'],
 ]);
+const CONNECTIONS=[
+ {id:'ownground-validation',displayName:'OWNGROUND Validation',origin:'https://validation-ownground.up.railway.app/',organizationCode:'OWNGROUND',environment:'validation',instanceId:'b98ebe26-359f-4393-b009-474f3a8a98b1',enabled:true},
+ {id:'myeongjin-production',displayName:'명진니팅',origin:'https://myeongjin.ownground.kr/',organizationCode:'MYEONGJIN',environment:'production',instanceId:'622caeea-6af9-42b5-946b-d953bfd84cc0',enabled:true},
+];
 const args=Object.fromEntries(process.argv.slice(3).map(value=>{const index=value.indexOf('=');return index<0?[value,true]:[value.slice(0,index),value.slice(index+1)]}));
 const exact=(value,keys,label)=>{const actual=Object.keys(value).sort(),expected=[...keys].sort();if(JSON.stringify(actual)!==JSON.stringify(expected))throw new Error(`${label} fields are invalid`)};
 const output=value=>{if(process.env.GITHUB_OUTPUT)fs.appendFileSync(process.env.GITHUB_OUTPUT,`${value}\n`)};
@@ -24,7 +28,7 @@ function prepare(){
  const remaining=Date.parse(current.expiresAt)-Date.now(),force=args.force==='true';
  if(!force&&remaining>14*DAY){console.log(`Registry renewal skipped: ${Math.ceil(remaining/DAY)} days remain`);output('changed=false');return}
  const issued=new Date(),expires=new Date(issued.getTime()+30*DAY);
- const payload=Buffer.from(JSON.stringify({...current,registryVersion:current.registryVersion+1,issuedAt:issued.toISOString(),expiresAt:expires.toISOString()}));
+ const payload=Buffer.from(JSON.stringify({...current,registryVersion:current.registryVersion+1,issuedAt:issued.toISOString(),expiresAt:expires.toISOString(),connections:CONNECTIONS}));
  fs.writeFileSync(args.payload,payload);
  fs.writeFileSync(args.message,Buffer.concat([DOMAIN,payload]));
  output('changed=true');
