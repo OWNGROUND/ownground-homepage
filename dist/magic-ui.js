@@ -4,8 +4,8 @@
  * iframe 로드 후 별도 레이어로 주입한다. 모든 효과는 prefers-reduced-motion에서 꺼진다.
  */
 (() => {
-  // Text Animate · Animated Beam (hero / gap / platform) · FROM DATA structure + beam · Magic Card · Scroll Progress
-  const EFFECTS = ['text', 'herobeam', 'evidence', 'gapbeam', 'platbeam', 'spotlight', 'progress'].map(key => ({ key }));
+  // Text Animate · Animated Beam (hero / gap / platform) · FROM DATA structure + beam · FIELD LEADS float + signal · Magic Card · Scroll Progress
+  const EFFECTS = ['text', 'herobeam', 'evidence', 'fieldfloat', 'gapbeam', 'platbeam', 'spotlight', 'progress'].map(key => ({ key }));
 
   const CSS = `
   @media (prefers-reduced-motion: reduce){
@@ -46,6 +46,15 @@
   html.mu-evidence #from-data .evidence-layer-field.mu-on .evidence-node{background:var(--green)}
   /* OPERATION sits on the DATA→FIELD line so the spine stays one straight line (value set by JS). */
   html.mu-evidence #from-data .evidence-layer-operation{left:var(--mu-x,12%)!important}
+
+  /* ---- 03 FIELD LEADS: floating values + intermittent short signal ---- */
+  .mu-ping-layer{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:0}
+  html:not(.mu-fieldfloat) .mu-ping-layer{display:none}
+  html:not(.mu-fieldfloat) #field-leads .unconnected-node{translate:none!important}
+  html.mu-fieldfloat #field-leads .unconnected-node{transition:box-shadow .5s ease}
+  html.mu-fieldfloat #field-leads .unconnected-node.mu-pinged{
+    box-shadow:inset 0 0 0 var(--outline) #2f8a63, 0 0 0 5px rgba(47,138,99,.10)}
+  @media (prefers-reduced-motion: reduce){ .mu-ping-layer{display:none!important} }
 
   /* ---- 06 ECOSYSTEM: Magic Card spotlight ---- */
   .mu-spotlight .ecosystem-role{position:relative;isolation:isolate}
@@ -234,6 +243,78 @@
       }, { threshold: 0.35 }).observe(fd);
       let rz = 0;
       win.addEventListener('resize', () => { win.clearTimeout(rz); rz = win.setTimeout(() => { build(); inView || reduce ? settle() : reset(); }, 150); });
+    }
+
+    // 03 FIELD LEADS: values drift in place; now and then one sends a short thin line toward a
+    // neighbour. The line never stays, so the section still reads "connection absent, but possible".
+    const fl = doc.querySelector('#field-leads');
+    const field = fl && fl.querySelector('.unconnected-field');
+    if (field && !reduce) {
+      const nodes = [...field.querySelectorAll('.unconnected-node')];
+      // Depth sets amplitude and pace: far values move least and slowest.
+      const DEPTH = { 'depth-bg': [3.5, 13000], 'depth-mid': [5.5, 10500], 'depth-fg': [8, 8500] };
+      const rnd = (a, b) => a + Math.random() * (b - a);
+      const floats = nodes.map(n => {
+        const [amp, dur] = DEPTH[[...n.classList].find(c => DEPTH[c])] || [5, 10000];
+        const pts = Array.from({ length: 4 }, () => [rnd(-amp, amp), rnd(-amp, amp)]);
+        const frames = [...pts, pts[0]].map(([x, y]) => ({ translate: `${x.toFixed(1)}px ${y.toFixed(1)}px` }));
+        return n.animate(frames, { duration: dur * rnd(.85, 1.15), delay: -rnd(0, dur), iterations: Infinity,
+          easing: 'ease-in-out', composite: 'replace' });
+      });
+
+      const svg = doc.createElementNS(NS, 'svg');
+      svg.setAttribute('class', 'mu-ping-layer'); svg.setAttribute('aria-hidden', 'true');
+      field.prepend(svg);
+      const centre = n => {
+        const f = field.getBoundingClientRect(), r = n.getBoundingClientRect();
+        return { x: r.left - f.left + r.width / 2, y: r.top - f.top + r.height / 2, r: r.width / 2 };
+      };
+      let timer = 0, active = false, raf = 0, last = -1;
+      const send = () => {
+        if (!active || !root.classList.contains('mu-fieldfloat')) return schedule();
+        const f = field.getBoundingClientRect();
+        svg.setAttribute('viewBox', `0 0 ${f.width} ${f.height}`);
+        // Prefer a nearer neighbour so the line reads as short; avoid repeating the last sender.
+        const pick = nodes.filter((_, i) => i !== last);
+        const aIdx = nodes.indexOf(pick[(Math.random() * pick.length) | 0]); last = aIdx;
+        const A = centre(nodes[aIdx]);
+        const near = nodes.map((n, i) => ({ i, c: centre(n) })).filter(o => o.i !== aIdx)
+          .map(o => ({ ...o, d: Math.hypot(o.c.x - A.x, o.c.y - A.y) })).sort((p, q) => p.d - q.d).slice(0, 3);
+        const B = near[(Math.random() * near.length) | 0];
+        const dx = B.c.x - A.x, dy = B.c.y - A.y, d = B.d || 1, ux = dx / d, uy = dy / d;
+        const sx = A.x + ux * (A.r + 3), sy = A.y + uy * (A.r + 3);
+        const ex = B.c.x - ux * (B.c.r + 3), ey = B.c.y - uy * (B.c.r + 3);
+        const run = Math.max(1, Math.hypot(ex - sx, ey - sy));
+        const tail = Math.min(46, run * .45);          // a short line, not a bridge
+        const id = 'mu-ping-g' + Date.now();
+        svg.innerHTML = `<defs><linearGradient id="${id}" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#2f8a63" stop-opacity="0"/><stop offset="1" stop-color="#2f8a63" stop-opacity=".85"/>
+          </linearGradient></defs><line stroke="url(#${id})" stroke-width="1" stroke-linecap="round"/>`;
+        const line = svg.querySelector('line'), grad = svg.querySelector('linearGradient');
+        const dur = 900 + run * 2.2, t0 = performance.now();
+        const step = now => {
+          const p = Math.min(1, (now - t0) / dur), e = p < .5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+          const head = e * run, tl = Math.max(0, head - tail);
+          const hx = sx + ux * head, hy = sy + uy * head, tx = sx + ux * tl, ty = sy + uy * tl;
+          [['x1', tx], ['y1', ty], ['x2', hx], ['y2', hy]].forEach(([k, v]) => { line.setAttribute(k, v); grad.setAttribute(k, v); });
+          line.style.opacity = p < .85 ? 1 : (1 - p) / .15;
+          if (p < 1) raf = win.requestAnimationFrame(step);
+          else {
+            svg.replaceChildren();
+            const tgt = nodes[B.i]; tgt.classList.remove('mu-pinged'); void tgt.offsetWidth; tgt.classList.add('mu-pinged');
+            win.setTimeout(() => tgt.classList.remove('mu-pinged'), 1400);
+            schedule();
+          }
+        };
+        raf = win.requestAnimationFrame(step);
+      };
+      const schedule = () => { win.clearTimeout(timer); if (active) timer = win.setTimeout(send, rnd(1800, 3600)); };
+      new win.IntersectionObserver(es => {
+        active = es[0].isIntersecting;
+        floats.forEach(a => active ? a.play() : a.pause());
+        if (active) schedule(); else { win.clearTimeout(timer); win.cancelAnimationFrame(raf); svg.replaceChildren(); }
+      }, { threshold: 0.3 }).observe(field);
+      floats.forEach(a => a.pause());
     }
 
     // 06 ECOSYSTEM spotlight follows cursor
