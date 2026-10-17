@@ -1,11 +1,11 @@
 /* OWNGROUND × Magic UI motion layer
- * Magic UI 컴포넌트 7종을 브랜드 기준(structured minimal, restrained green)에 맞춰
+ * Magic UI 컴포넌트를 브랜드 기준(structured minimal, restrained green)에 맞춰
  * 바닐라 CSS/JS로 옮긴 시안. 기존 site-shell + index 패치 구조는 건드리지 않고,
  * iframe 로드 후 별도 레이어로 주입한다. 모든 효과는 prefers-reduced-motion에서 꺼진다.
  */
 (() => {
-  // Text Animate · Animated Beam (hero / gap / platform) · FROM DATA structure + beam · FIELD LEADS float + signal · Magic Card · Scroll Progress
-  const EFFECTS = ['text', 'herobeam', 'evidence', 'fieldfloat', 'gapbeam', 'platbeam', 'spotlight', 'progress'].map(key => ({ key }));
+  // Text Animate · Animated Beam · FROM DATA structure · FIELD LEADS float + signal · Magic Card · Scroll Progress · language switch
+  const EFFECTS = ['text', 'herobeam', 'evidence', 'fieldfloat', 'gapbeam', 'platbeam', 'spotlight', 'progress', 'langswap', 'langmenu'].map(key => ({ key }));
 
   const CSS = `
   @media (prefers-reduced-motion: reduce){
@@ -65,6 +65,11 @@
     background:radial-gradient(180px circle at var(--mx,50%) 0,var(--green),transparent 70%);transition:opacity .35s}
   .mu-spotlight .ecosystem-role:hover::before,.mu-spotlight .ecosystem-role:hover::after{opacity:1}
 
+  /* ---- Language menu: options arrive in reading order, the label flips up ---- */
+  html.mu-langmenu .locale-switch span{display:inline-block}
+  html.mu-langmenu .locale-switch{overflow:hidden}
+  @media (prefers-reduced-motion: reduce){ .locale-menu [data-locale], .locale-switch span{animation:none!important} }
+
   /* ---- Scroll Progress ---- */
   .mu-progress{position:fixed;left:0;top:85px;height:2px;width:100%;transform-origin:0 50%;transform:scaleX(var(--p,0));
     background:var(--green);z-index:999;pointer-events:none;display:none}
@@ -89,11 +94,13 @@
 
     // ---- Text Animate: split hero title by <br> lines
     const h1 = doc.querySelector('#brand-core .hero-title');
-    if (h1 && !h1.dataset.mu) {
-      h1.dataset.mu = '1';
+    // Also re-run after a language switch, which rewrites the title; `animate` replays the entrance.
+    const splitHero = (animate = true) => {
+      if (!h1 || h1.querySelector('.mu-line')) return;
       const parts = h1.innerHTML.split(/<br\s*\/?>/i);
-      h1.innerHTML = parts.map((t, i) => `<span class="mu-line" style="--i:${i}">${t}</span>`).join('<br>');
-    }
+      h1.innerHTML = parts.map((t, i) => `<span class="mu-line" style="--i:${i}${animate ? '' : ';animation-duration:0s;animation-delay:0s'}">${t}</span>`).join('<br>');
+    };
+    splitHero();
 
     // ---- Beam factory: a short bright segment travelling along an existing path
     function beam(path, group, { width = 2.2, seg = 0.16, dur = 2600, delay = 0, reverse = false } = {}) {
@@ -325,6 +332,61 @@
         card.style.setProperty('--my', `${e.clientY - r.top}px`);
       });
     });
+
+    // Language switch: the copy that changes blurs out, the new language blurs in, top to bottom.
+    // Only text on screen animates; the hero re-splits so its line-by-line entrance plays again.
+    const menu = doc.querySelector('.locale-menu');
+    if (menu && !reduce) {
+      const SWAP = ['#brand-core .hero-title', '#from-data .from-data-title', '#from-data .from-data-body p',
+        '#from-data .from-data-conclusion strong', '#field-leads .philosophy-title', '#field-leads .philosophy-body-inline p',
+        '#field-leads .field-value-title', '#the-gap .story-head h2', '#the-gap .gap-relation strong', '#the-gap .gap-close strong',
+        '#the-platform .platform-head h2', '#ecosystem .ecosystem-title', '#ecosystem .ecosystem-role p'].join(',');
+      const OUT_MS = 200, IN_MS = 460, STEP = 45;
+      let passing = false;
+      const onScreen = () => [...doc.querySelectorAll(SWAP)].filter(el => {
+        const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < win.innerHeight && r.width > 0;
+      }).sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+      menu.addEventListener('click', e => {
+        const opt = e.target.closest('[data-locale]');
+        if (passing || !opt || !root.classList.contains('mu-langswap') || opt.dataset.locale === doc.documentElement.lang) return;
+        e.stopPropagation(); e.preventDefault();          // hold the switch until the old copy has left
+        const els = onScreen();
+        const outs = els.map((el, i) => el.animate([{ opacity: 1, filter: 'blur(0)' }, { opacity: 0, filter: 'blur(6px)' }],
+          { duration: OUT_MS, delay: i * 25, easing: 'ease-in', fill: 'forwards' }));
+        const hold = OUT_MS + Math.max(0, els.length - 1) * 25;
+        win.setTimeout(() => {
+          passing = true; opt.click(); passing = false;   // the site's own handler swaps the copy
+          outs.forEach(a => a.cancel());
+          els.forEach((el, i) => {
+            if (el === h1) return splitHero(true);
+            el.animate([{ opacity: 0, filter: 'blur(8px)', transform: 'translateY(6px)' }, { opacity: 1, filter: 'blur(0)', transform: 'none' }],
+              { duration: IN_MS, delay: i * STEP, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards' });
+          });
+          if (!els.includes(h1)) splitHero(false);
+        }, hold);
+      }, true);
+    }
+
+    // Language menu: when it opens, options arrive one by one; when the language changes,
+    // the KO / EN label flips up like the COPY button on the downloads page.
+    const lmenu = doc.querySelector('.locale-menu'), lswitch = doc.querySelector('.locale-switch');
+    if (lmenu && lswitch && !reduce) {
+      new win.MutationObserver(() => {
+        if (lmenu.hidden || !root.classList.contains('mu-langmenu')) return;
+        [...lmenu.querySelectorAll('[data-locale]')].forEach((o, i) =>
+          o.animate([{ opacity: 0, transform: 'translateY(-6px)', filter: 'blur(3px)' }, { opacity: 1, transform: 'none', filter: 'blur(0)' }],
+            { duration: 260, delay: i * 28, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards' }));
+      }).observe(lmenu, { attributes: true, attributeFilter: ['hidden'] });
+      const label = lswitch.querySelector('span');
+      let shown = label && label.textContent;
+      if (label) new win.MutationObserver(() => {
+        const now = label.textContent;
+        if (now === shown) return; shown = now;
+        if (!root.classList.contains('mu-langmenu')) return;
+        label.animate([{ transform: 'translateY(110%)', opacity: 0 }, { transform: 'none', opacity: 1 }],
+          { duration: 340, easing: 'cubic-bezier(.2,.7,.2,1)' });
+      }).observe(label, { childList: true, characterData: true, subtree: true });
+    }
 
     // Scroll progress
     const bar = doc.createElement('div'); bar.className = 'mu-progress'; doc.body.appendChild(bar);

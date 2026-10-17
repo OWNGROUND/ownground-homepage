@@ -127,6 +127,31 @@
     b.innerHTML = `<span class="mu-face">${copied ? '✓ ' : ''}${txt}</span>`;
   })).observe(doc.querySelector('.products'), { characterData: true, childList: true, subtree: true });
 
+  // ---- Language switch: on-screen copy blurs out, the new language blurs in top to bottom
+  const langSel = doc.querySelector('.lang');
+  if (langSel && !reduce) {
+    let passing = false, prev = langSel.value;
+    const visible = () => [...doc.querySelectorAll('[data-i18n], .release-body')].filter(el => {
+      const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight && r.width > 0;
+    }).sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+    langSel.addEventListener('change', e => {
+      if (passing) { prev = langSel.value; return; }
+      e.stopImmediatePropagation();                      // hold the page's own switch until the old copy has left
+      const next = langSel.value; langSel.value = prev;
+      const els = visible();
+      const outs = els.map((el, i) => el.animate([{ opacity: 1, filter: 'blur(0)' }, { opacity: 0, filter: 'blur(6px)' }],
+        { duration: 200, delay: i * 20, easing: 'ease-in', fill: 'forwards' }));
+      setTimeout(() => {
+        langSel.value = next; passing = true;
+        langSel.dispatchEvent(new Event('change')); passing = false;
+        outs.forEach(a => a.cancel());
+        els.forEach((el, i) => el.animate(
+          [{ opacity: 0, filter: 'blur(8px)', transform: 'translateY(6px)' }, { opacity: 1, filter: 'blur(0)', transform: 'none' }],
+          { duration: 460, delay: i * 40, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards' }));
+      }, 200 + Math.max(0, els.length - 1) * 20);
+    }, true);
+  }
+
   const set = (k, on) => root.classList.toggle('mux-' + k, on);
   EFFECTS.forEach(e => set(e.key, true));
 })();
