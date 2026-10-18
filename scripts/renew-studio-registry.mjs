@@ -9,7 +9,7 @@ const TRUSTED_KEYS=new Map([
 ]);
 const CONNECTIONS=[
  {id:'ownground-validation',displayName:'OWNGROUND Validation',origin:'https://validation-ownground.up.railway.app/',organizationCode:'OWNGROUND',environment:'validation',instanceId:'b98ebe26-359f-4393-b009-474f3a8a98b1',enabled:true},
- {id:'myeongjin-production',displayName:'명진니팅',origin:'https://myeongjin.ownground.kr/',organizationCode:'MYEONGJIN',environment:'production',instanceId:'622caeea-6af9-42b5-946b-d953bfd84cc0',enabled:true},
+ {id:'myeongjin-production',displayName:'명진니팅',origin:'https://myeongjin.operation.ownground.co.kr/',organizationCode:'MYEONGJIN',environment:'production',instanceId:'622caeea-6af9-42b5-946b-d953bfd84cc0',enabled:true},
 ];
 const args=Object.fromEntries(process.argv.slice(3).map(value=>{const index=value.indexOf('=');return index<0?[value,true]:[value.slice(0,index),value.slice(index+1)]}));
 const exact=(value,keys,label)=>{const actual=Object.keys(value).sort(),expected=[...keys].sort();if(JSON.stringify(actual)!==JSON.stringify(expected))throw new Error(`${label} fields are invalid`)};
