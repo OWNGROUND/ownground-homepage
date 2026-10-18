@@ -8,15 +8,15 @@
       "releases": {
         "lts": {
           "status": "ready",
-          "version": "0.2.3",
-          "releasedAt": "2026-10-18",
+          "version": "0.2.4",
+          "releasedAt": "2026-10-19",
           "platform": "Windows 10/11",
           "arch": "x64",
           "fileSize": "230.66 MB",
-          "sha256": "4EF40FA3364E918D68D3B18EC77E710871017BD426BD79E254C1979EC99AA533",
+          "sha256": "0E6F4FBDD7862448949F2C0C175573BC5BC9C7D7FD0A2EE5E8A38C6D9B904C50",
           "signed": false,
-          "downloadUrl": "https://github.com/OWNGROUND/ownground-releases/releases/download/studio-v0.2.3/OWNGROUND-Studio_0.2.3_x64-setup.exe",
-          "releaseNotesUrl": "https://github.com/OWNGROUND/ownground-releases/releases/tag/studio-v0.2.3"
+          "downloadUrl": "https://github.com/OWNGROUND/ownground-releases/releases/download/studio-v0.2.4/OWNGROUND-Studio_0.2.4_x64-setup.exe",
+          "releaseNotesUrl": "https://github.com/OWNGROUND/ownground-releases/releases/tag/studio-v0.2.4"
         },
         "latest": {
           "status": "pending",
